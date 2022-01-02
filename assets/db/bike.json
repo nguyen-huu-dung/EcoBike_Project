@@ -50,13 +50,13 @@
         "parkingId": "2"
     },
     {
-        "id": "5",
+        "id": "6",
         "category": "Xe đạp điện",
-        "barcode": "ECO0003",
+        "barcode": "ECO0006",
         "isRented": false,
         "deposit": "700.000",
-        "licensePlate": "XD-005",
+        "licensePlate": "XD-006",
         "rentalPrice": [15.000, 4.500],
-        "parkingId": "2"
+        "parkingId": "6"
     }
 ]

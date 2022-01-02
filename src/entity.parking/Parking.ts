@@ -14,7 +14,7 @@ class Parking {
     private numFreeSingle: Number;
     private numFreeCouple: Number;
     private numFreeElectric: Number;
-    private availabilityBikes: Array<Bike>;
+    private availabilityBikes: Array<any>;
 
     constructor(...params : any[]) {
         if(params.length === 10) {
@@ -150,11 +150,11 @@ class Parking {
         return this;
     }
 
-    public getAvailabilityBikes() : Array<Bike> {
+    public getAvailabilityBikes() : Array<any> {
         return this.availabilityBikes;
     }
 
-    public setAvailabilityBikes(availabilityBikes: Array<Bike>) : Parking {
+    public setAvailabilityBikes(availabilityBikes: Array<any>) : Parking {
         this.availabilityBikes = availabilityBikes;
         return this;
     }

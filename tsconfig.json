@@ -2,7 +2,6 @@
     "compilerOptions": {
         "module": "commonjs",
         "resolveJsonModule": true,
-        "isolatedModules": true,
         "moduleResolution": "node",
         "pretty": true,
         "sourceMap": true,

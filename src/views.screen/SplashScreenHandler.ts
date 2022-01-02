@@ -4,7 +4,6 @@ class SplashScreenHandler extends BaseScreenHandler {
 
     constructor(req, res, viewPath) {
         super(req, res, viewPath);
-        this.show();
     }
     
 }

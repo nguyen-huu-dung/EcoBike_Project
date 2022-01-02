@@ -5,9 +5,18 @@ import { SplashScreenHandler } from "../views.screen/SplashScreenHandler";
 
 const router = Router();
 
-router.get('/', (req, res) => new SplashScreenHandler(req, res, 'SplashScreen'));
+router.get('/', (req, res) => new SplashScreenHandler(req, res, 'SplashScreen').show());
 
-router.get('/home', (req, res) => new HomeScreenHandler(req, res, 'HomeScreen').show());
+router.get('/home', (req, res) => {
+    const homeScreenHandler = new HomeScreenHandler(req, res, 'HomeScreen')
+    const key : String = req.query.search as String;
+    if(key === undefined || key === null) {
+        homeScreenHandler.show();
+    }
+    else {
+        homeScreenHandler.search(key);
+    }
+});
 
 router.get('/parking', (req, res) => new DetailsParkingScreenHandler(req, res, 'DetailsParkingScreen'));
 

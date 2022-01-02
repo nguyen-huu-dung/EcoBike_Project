@@ -28,15 +28,16 @@ class Bike {
         let listBike : Array<Bike> = [];
         data.forEach((bike) => {
             if(bike.parkingId === parkingId && !bike.isRented ) {
-                const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
-                listBike.push(new Bike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId));
+                listBike.push(this.getBikeById(bike.id));
             }
         })
         return listBike;
     }
 
-    public getBikeById(bikeId: String): Object {
-        let bike : Object = {};
+    public getBikeById(bikeId: String): Bike {
+        let bike : any = data.filter((bike) => bike.id === bikeId)[0];
+        const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
+        bike = new Bike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
         return bike;
     }
 
