@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Details Parking</title>
+  <style>
+    .header {
+      height: 150px;
+      background-color:  #efebe9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 50px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .text-1 {
+      margin-left: 10px;
+      font-size: 40px;
+      color: rgb(35, 185, 35);
+      font-weight: 750;
+    }
+    .logo > img, button, .return :hover {
+      cursor: pointer;
+    }
+    .logo-btn {
+      border: none;
+      background-color: inherit;
+    }
+    .size-img-1 {
+      height: 80px;
+      width: 80px;
+    }
+    .size-img-2 {
+      height: 50px;
+      width: 50px;
+    }
+    .content {
+      background-color: rgb(241 241 241 / 57%);
+      height: calc(100vh - 150px);
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .info-parking {
+      width: 39%;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+    }
+    .details-info div{
+      margin-bottom: 10px;
+    }
+    .details-info div > div {
+      margin-left: 40px;
+    }
+    .width-100 {
+      display: inline-block;
+      width: 100px;
+    }
+    h3 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    .list-bike {
+      width: 60%;
+      background-color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      overflow-y: auto;
+    }
+    .bike {
+      width: 49%;
+      height: fit-content;
+      background-color: rgb(241 241 241 / 57%);
+      margin-bottom: 10px;
+      padding: 20px 40px;
+    }
+    .bike:last-child {
+      margin-bottom: 0px;
+    }
+    .bike h4 {
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .bike > div {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .bike button {
+      height: 45px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <form action="/home" method="get">
+          <button class="logo-btn" type="submit"><img class="size-img-1" src="images/logo.png" alt="logo"></button>
+        </form>
+        <div class="name-app text-1">EcoBike</div>
+        <div class="text-1">|</div>
+        <div class="text-1">Bãi xe</div>
+      </div>
+      <div class="return">
+        <img class="size-img-2" src="images/return.png" alt="return bike">
+      </div>
+    </div>
+    <div class="content">
+      <div class="info-parking">
+        <h3>Thông tin bãi xe</h3>
+        <div class="details-info">
+          <div><strong class="width-100">Tên bãi xe:</strong><span><%= parkingInfo.name %></span></div>
+          <div><strong class="width-100">Địa chị:</strong><span><%= parkingInfo.address %></span></div>
+          <div><strong class="width-100">Diện tích:</strong><span><%= parkingInfo.area %> m2</span></div>
+          <div><strong class="width-100">Sức chứa:</strong></div>
+          <div>
+            <div><span class="width-100">Xe đạp đơn:</span> <span><%= parkingInfo.numSingle + parkingInfo.numFreeSingle %></span></div>
+            <div><span class="width-100">Xe đạp đôi:</span> <span><%= parkingInfo.numCouple + parkingInfo.numFreeCouple %></span></div>
+            <div><span class="width-100">Xe đạp điện:</span> <span><%= parkingInfo.numElectric + parkingInfo.numFreeElectric %></span></div>
+          </div>
+          <div><strong>Xe khả dụng:</strong></div>
+          <div>
+            <div><span class="width-100">Xe đạp đơn:</span><span><%= parkingInfo.numSingle %></span></div>
+            <div><span class="width-100">Xe đạp đôi:</span><span><%= parkingInfo.numCouple %></span></div>
+            <div><span class="width-100">Xe đạp điện:</span><span><%= parkingInfo.numElectric %></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="list-bike">
+        <% parkingInfo.availabilityBikes.forEach((bike) => { %>
+          <div class="bike">
+            <h4><%= bike.category %></h4>
+            <div class="info-bike">
+              <div>
+                <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
+                <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
+                <div><strong class="width-100">Lượng pin:</strong><span><%= bike.battery %></span></div>
+              </div>
+              <form action="/confirm-rent-bike" method="get">
+                <input type="hidden" name="bikeId" value=<%= bike.id %>>
+                <button type="submit">Thuê xe</button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

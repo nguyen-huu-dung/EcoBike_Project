@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Splash</title>
+  <style>
+    .container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+    .name-app {
+      font-size: 80px;
+      color: rgb(35, 185, 35);
+      font-weight: 750;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/logo.png" alt="logo">
+    <div class="name-app">EcoBike</div>
+  </div>
+  <script>
+    setTimeout(() => {
+      window.location.replace('/home');
+    }, 1000);
+  </script>
+</body>
+</html>

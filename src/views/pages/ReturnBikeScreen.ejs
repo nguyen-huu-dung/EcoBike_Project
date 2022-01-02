@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Return bike</title>
+  <style>
+    .header {
+      height: 150px;
+      background-color:  #efebe9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 50px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .text-1 {
+      margin-left: 10px;
+      font-size: 40px;
+      color: rgb(35, 185, 35);
+      font-weight: 750;
+    }
+    .logo > img, button, .return :hover {
+      cursor: pointer;
+    }
+    .size-img-1 {
+      height: 80px;
+      width: 80px;
+    }
+    .size-img-2 {
+      height: 50px;
+      width: 50px;
+    }
+    .list-parking {
+      padding: 10px;
+      background-color: rgb(241 241 241 / 57%);
+      height: calc(100vh - 150px);
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .parking {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 24%;
+      border: 1px solid gray;
+      background-color: white;
+      height: 29%;
+    }
+    .address-parking {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    .name-parking {
+      font-weight: 750;
+      text-align: center;
+    }
+    .details-parking {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .details-parking button {
+      height: fit-content;
+      padding: 3px 5px;
+    }
+    .avai-parking {
+      margin-right: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+        <div class="logo">
+            <img class="size-img-1" src="images/logo.png" alt="logo">
+            <div class="name-app text-1">EcoBike</div>
+            <div class="text-1">|</div>
+            <div class="text-1">Xe đang thuê</div>
+          </div>
+          <div class="return">
+            <img class="size-img-2" src="images/return.png" alt="return bike">
+          </div>
+    </div>
+    <div class="list-parking">
+        <% for(let i = 1; i <= 12; i++ ){ %>
+          <div class="parking">
+            <div class="name-parking">Bãi xe Hai Bà Trưng</div>
+            <div class="address-parking">34 Trần Đại Nghĩa, Hà Nội</div>
+            <div class="details-parking">
+              <div class="avai-parking">
+                <div>
+                    <strong>Vị trí trống</strong>
+                </div>
+                <div>
+                  <strong>Xe đạp đơn:</strong>
+                  <span>10</span>
+                </div>
+                <div>
+                  <strong>Xe đạp đôi:</strong>
+                  <span>5</span>
+                </div>
+                <div>
+                  <strong>Xe đạp điện:</strong>
+                  <span>6</span>
+                </div>
+              </div>
+              <button>Xác nhận trả xe</button>
+           </div>
+          </div>
+        <% }%>
+    </div>
+  </div>
+</body>
+</html>

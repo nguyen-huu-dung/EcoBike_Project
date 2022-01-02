@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "category": "Xe đạp đơn",
+        "barcode": "ECO0001",
+        "isRented": false,
+        "deposit": "400.000",
+        "licensePlate": "XD-001",
+        "rentalPrice": [10.000, 3.000],
+        "parkingId": "1"
+    },
+    {
+        "id": "2",
+        "category": "Xe đạp đôi",
+        "barcode": "ECO0002",
+        "isRented": false,
+        "deposit": "500.000",
+        "licensePlate": "XD-002",
+        "rentalPrice": [15.000, 4.500],
+        "parkingId": "1"
+    },
+    {
+        "id": "3",
+        "category": "Xe đạp điện",
+        "barcode": "ECO0003",
+        "isRented": false,
+        "deposit": "700.000",
+        "licensePlate": "XD-003",
+        "rentalPrice": [15.000, 4.500],
+        "parkingId": "1"
+    },
+    {
+        "id": "4",
+        "category": "Xe đạp đơn",
+        "barcode": "ECO0004",
+        "isRented": false,
+        "deposit": "400.000",
+        "licensePlate": "XD-004",
+        "rentalPrice": [10.000, 3.000],
+        "parkingId": "2"
+    },
+    {
+        "id": "5",
+        "category": "Xe đạp đôi",
+        "barcode": "ECO0005",
+        "isRented": false,
+        "deposit": "500.000",
+        "licensePlate": "XD-005",
+        "rentalPrice": [15.000, 4.500],
+        "parkingId": "2"
+    },
+    {
+        "id": "5",
+        "category": "Xe đạp điện",
+        "barcode": "ECO0003",
+        "isRented": false,
+        "deposit": "700.000",
+        "licensePlate": "XD-005",
+        "rentalPrice": [15.000, 4.500],
+        "parkingId": "2"
+    }
+]

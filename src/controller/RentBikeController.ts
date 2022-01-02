@@ -1,0 +1,3 @@
+class RentBikeController extends BaseController {
+    
+}

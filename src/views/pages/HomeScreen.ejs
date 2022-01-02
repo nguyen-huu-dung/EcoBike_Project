@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Home</title>
+  <style>
+    .header {
+      height: 150px;
+      background-color:  #efebe9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 50px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo .name-app {
+      margin-left: 10px;
+      font-size: 40px;
+      color: rgb(35, 185, 35);
+      font-weight: 750;
+    }
+    input, .header button {
+      height: 45px;
+      padding: 10px;
+    }
+    input {
+      width: 500px;
+    }
+    .logo, button, .return-bike :hover {
+      cursor: pointer;
+    }
+    .size-img-1 {
+      height: 80px;
+      width: 80px;
+    }
+    .list-parking {
+      padding: 10px;
+      background-color: rgb(241 241 241 / 57%);
+      height: calc(100vh - 150px);
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+    .parking {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 24%;
+      border: 1px solid gray;
+      background-color: white;
+      height: 29%;
+      margin-right: 1%;
+    }
+    .address-parking {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    .name-parking {
+      font-weight: 750;
+      text-align: center;
+    }
+    .details-parking {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .details-parking button {
+      height: fit-content;
+      padding: 3px 5px;
+    }
+    .avai-parking {
+      margin-left: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img class="size-img-1" src="images/logo.png" alt="logo">
+        <div class="name-app">EcoBike</div>
+      </div>
+      <div>
+        <!-- <form action='/home' method="get">
+          <input type="text" id="search" name="search" placeholder="Tìm kiếm bãi xe">
+          <button type="submit" id="search-btn">Tìm kiếm bãi xe</button>
+        </form> -->
+        <input type="text" id="search" name="search" placeholder="Tìm kiếm bãi xe">
+        <button type="submit" id="search-btn">Tìm kiếm bãi xe</button>
+      </div>
+      <div class="return-bike">
+        <img class="size-img-1" src="images/rent-bike.png" alt="return bike">
+      </div>
+    </div>
+    <div class="list-parking">
+        <% listParking.forEach((parking) => { %>
+          <div class="parking" id=<%= parking.id %>>
+            <div class="name-parking"><%=  parking.name %></div>
+            <div class="address-parking"><%= parking.address %></div>
+            <div class="details-parking">
+              <form action='/parking' method="get">
+                <input type="hidden" name="parkingId" value=<%= parking.id %>>
+                <button type="submit">Chi tiết</button>
+              </form>
+              <div class="avai-parking">
+                <div>
+                  <strong>Xe đạp đơn:</strong>
+                  <span><%= parking.numSingle %></span>
+                </div>
+                <div>
+                  <strong>Xe đạp đôi:</strong>
+                  <span><%= parking.numCouple %></span>
+                </div>
+                <div>
+                  <strong>Xe đạp điện:</strong>
+                  <span><%= parking.numElectric %></span>
+                </div>
+              </div>
+           </div>
+          </div>
+        <% })%>
+    </div>
+  </div>
+  <script>
+    // import { HomeScreenHandler } from '../../views.screen.home/HomeScreenHandler';
+    // const homeScreenHandler = new HomeScreenHandler();
+    // document.getElementById('search-btn').addEventListener('click', () => {
+    //   homeScreenHandler.search(document.getElementById('search').value);
+    // })
+  </script>
+</body>
+</html>

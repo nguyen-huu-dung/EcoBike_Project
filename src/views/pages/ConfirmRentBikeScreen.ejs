@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Confirm Rent Bike</title>
+  <style>
+    * {
+      font-size: 24px;
+    }
+    .header {
+      height: 150px;
+      background-color:  #efebe9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 50px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .text-1 {
+      margin-left: 10px;
+      font-size: 40px;
+      color: rgb(35, 185, 35);
+      font-weight: 750;
+    }
+    .logo > img, button, .return :hover {
+      cursor: pointer;
+    }
+    .size-img-1 {
+      height: 80px;
+      width: 80px;
+    }
+    .size-img-2 {
+      height: 50px;
+      width: 50px;
+    }
+    .content {
+      background-color: rgb(241 241 241 / 57%);
+      height: calc(100vh - 150px);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+    }
+    h3 {
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+    .info-bike {
+      display: flex;
+      width: 60%;
+      justify-content: center;
+    }
+    .info-bike div {
+      margin-bottom: 10px;
+    }
+    .width-130 {
+      display: inline-block;
+      width: 130px;
+    }
+    .info-1, .info-2 {
+      margin-left: 100px;
+    }
+    .rent-cost {
+      padding-left: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img class="size-img-1" src="images/logo.png" alt="logo">
+        <div class="name-app text-1">EcoBike</div>
+        <div class="text-1">|</div>
+        <div class="text-1">Thuê xe</div>
+      </div>
+      <div class="return">
+        <img class="size-img-2" src="images/return.png" alt="return bike">
+      </div>
+    </div>
+    <div class="content">
+        <h3>Thông tin xe</h3>
+        <div class="info-bike">
+            <div class="info-1">
+                <div><strong class="width-130">Loại xe:</strong><span>Xe đạp đơn</span></div>
+                <div><strong class="width-130">Mã vạch:</strong><span>ECO00001</span></div>
+                <div><strong class="width-130">Tên bãi xe:</strong><span>Bãi xe Hai Bà trưng</span></div>
+                <div><strong class="width-130">Lượng pin:</strong><span>Không</span></div>
+                <div><strong class="width-130">Đặt cọc:</strong><span>400.000 </span>VND</div>
+            </div>
+            <div class="info-2">
+                <div><strong class="width-130">Thời gian:</strong><span>Không</span></div>
+                <div><strong class="width-130">Biển số xe:</strong>Không</div>
+                <div>
+                  <strong class="width-130">Giá thuê:</strong>
+                  <div class="rent-cost">
+                    <span> Dưới 10 phút: Miễn phí</span><br>
+                    <span> 30 phút đầu: 15.000 VND</span><br>
+                    <span>15 phút tiếp (lũy tiến): 3.000 VND</span>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <button>Thuê xe</button>
+    </div>
+  </div>
+</body>
+</html>
