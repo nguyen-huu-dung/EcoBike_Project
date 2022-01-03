@@ -76,21 +76,21 @@ class Parking {
     public async getParkingById(parkingId: string): Promise<Parking> {
         try {
             const parking = await this.parkingServiceInterface.getParkingById(parkingId);
-            const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
-            const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
-            const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
-            const newParking : Parking = new Parking()
-                                    .setId(parking.id)
-                                    .setName(parking.name)
-                                    .setAddress(parking.address)
-                                    .setArea(parking.area)
-                                    .setNumSingle(parking.numSingle)
-                                    .setNumCouple(parking.numCouple)
-                                    .setNumElectric(parking.numElectric)
-                                    .setNumFreeSingle(numFreeSingle)
-                                    .setNumFreeCouple(numFreeCouple)
-                                    .setNumFreeElectric(numFreeElectric);
-            return newParking;
+            // const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
+            // const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
+            // const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
+            // const newParking : Parking = new Parking()
+            //                         .setId(parking.id)
+            //                         .setName(parking.name)
+            //                         .setAddress(parking.address)
+            //                         .setArea(parking.area)
+            //                         .setNumSingle(parking.numSingle)
+            //                         .setNumCouple(parking.numCouple)
+            //                         .setNumElectric(parking.numElectric)
+            //                         .setNumFreeSingle(numFreeSingle)
+            //                         .setNumFreeCouple(numFreeCouple)
+            //                         .setNumFreeElectric(numFreeElectric);
+            return parking;
         } catch (error) {
             console.log(error);
         }

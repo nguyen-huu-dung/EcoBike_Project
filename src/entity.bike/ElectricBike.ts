@@ -7,19 +7,17 @@ class ElectricBike extends Bike {
     private battery : number;
     private estimatingTime: number;
 
-    constructor(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId, battery, estimatingTime) {
-        super(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
-        this.battery = battery;
-        this.estimatingTime = estimatingTime;
+    constructor() {
+        super();
     }
 
-    public static getBikeById(bikeId: string): ElectricBike {
-        let bike : any = Bikes.filter((bike) => bike.id === bikeId)[0];
-        let electric : any = Bikes.filter((bike) => bike.id === bikeId)[0];
-        const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
-        const { battery, estimatingTime } = electric;
-        bike = new ElectricBike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId, battery, estimatingTime);
-        return bike;
+    public static getBikeById(bikeId: string) {
+        // let bike : any = Bikes.filter((bike) => bike.id === bikeId)[0];
+        // let electric : any = Bikes.filter((bike) => bike.id === bikeId)[0];
+        // const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
+        // const { battery, estimatingTime } = electric;
+        // bike = new ElectricBike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId, battery, estimatingTime);
+        // return bike;
     }
 
     public getBattery() : number {
