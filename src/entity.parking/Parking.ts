@@ -18,21 +18,9 @@ class Parking {
     private numFreeElectric: Number;
     private availabilityBikes: Array<any>;
 
-    public getAllParking(): Array<Parking> {
-        let listParking : Array<Parking> = [];
-        console.log(1);
-        this.parkingServiceInterface.getAllParking();
-        // data.forEach((parking) => {
-        //     const { id, name, address, area, numSingle, numCouple, numElectric } = parking;
-        //     listParking.push(new Parking()
-        //                             .setId(id)
-        //                             .setName(name)
-        //                             .setAddress(address)
-        //                             .setArea(area)
-        //                             .setNumsingle(numSingle)
-        //                             .setNumCouple(numCouple)
-        //                             .setNumElectric(numElectric));
-        // })
+    public async getAllParking() {
+        let listParking = await this.parkingServiceInterface.getAllParking();
+        
         return listParking;
     }
 

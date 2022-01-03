@@ -9,9 +9,9 @@ class HomeScreenHandler extends BaseScreenHandler {
         this.setBController(new HomeController());
     }
 
-    public show() : void {
+    public async show() {
         try {
-            let listParking: Array<Parking> = this.getBController().getAllParking();
+            let listParking = await this.getBController().getAllParking();
             this.setContent({listParking});
             super.show();
         } catch (error) {

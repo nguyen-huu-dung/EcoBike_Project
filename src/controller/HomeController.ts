@@ -1,3 +1,4 @@
+import { ParkingService } from "../service/ParkingService/ParkingService";
 import { Parking } from "../entity.parking/Parking";
 import { BaseController } from "./BaseController";
 
@@ -7,10 +8,10 @@ class HomeController extends BaseController {
 
     constructor() {
         super();
-        this.parking = new Parking();
+        this.parking = new Parking().setParkingService(new ParkingService());
     }
 
-    public getAllParking(): Array<Parking> {
+    public getAllParking() {
         return this.parking.getAllParking();
     }
 

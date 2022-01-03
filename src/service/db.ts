@@ -6,7 +6,7 @@ class Database {
     private static conn;
     
     public static getConnectDb() : any {
-        if(this.conn === null) {
+        if(this.conn === null || this.conn === undefined) {
             this.conn = mysql.createConnection({
                 host: Configs.HOST,
                 user: Configs.USER,
