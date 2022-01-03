@@ -1,8 +1,10 @@
 import { Utils } from '../utils/Utils';
-import * as data from '../../assets/db/parking.json';
 import { Bike } from '../entity.bike/Bike';
+import { ParkingServiceInterface } from '../service/ParkingService/ParkingServiceInterface';
 
 class Parking {
+
+    private parkingServiceInterface : ParkingServiceInterface;
 
     private id: String;
     private name: String;
@@ -16,50 +18,49 @@ class Parking {
     private numFreeElectric: Number;
     private availabilityBikes: Array<any>;
 
-    constructor(...params : any[]) {
-        if(params.length === 10) {
-            this.id = params[0];
-            this.name = params[1];
-            this.address = params[2];
-            this.area = params[3];
-            this.numSingle = params[4];
-            this.numCouple = params[5];
-            this.numElectric = params[5];
-            this.numFreeSingle = params[7];
-            this.numFreeCouple = params[8];
-            this.numFreeElectric = params[9];
-        }
-    }
-
     public getAllParking(): Array<Parking> {
         let listParking : Array<Parking> = [];
-        data.forEach((parking) => {
-            const { id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parking;
-            listParking.push(new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric));
-        })
+        console.log(1);
+        this.parkingServiceInterface.getAllParking();
+        // data.forEach((parking) => {
+        //     const { id, name, address, area, numSingle, numCouple, numElectric } = parking;
+        //     listParking.push(new Parking()
+        //                             .setId(id)
+        //                             .setName(name)
+        //                             .setAddress(address)
+        //                             .setArea(area)
+        //                             .setNumsingle(numSingle)
+        //                             .setNumCouple(numCouple)
+        //                             .setNumElectric(numElectric));
+        // })
         return listParking;
     }
 
     public searchParking(key: String): Array<Parking> {
         let keyFormat: String = Utils.cleanAccents(key);
         let searchParking: Array<Parking> = [];
-        data.forEach((parking) => {
-            let nameFormat = Utils.cleanAccents(parking.name);
-            let addressFormat = Utils.cleanAccents(parking.address);
-            if(nameFormat.toLocaleLowerCase().includes(keyFormat as string) || addressFormat.toLocaleLowerCase().includes(keyFormat as string)) {
-                const { id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parking;
-                searchParking.push(new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric));
-            };
-        })
+        // data.forEach((parking) => {
+        //     let nameFormat = Utils.cleanAccents(parking.name);
+        //     let addressFormat = Utils.cleanAccents(parking.address);
+        //     if(nameFormat.toLocaleLowerCase().includes(keyFormat as string) || addressFormat.toLocaleLowerCase().includes(keyFormat as string)) {
+        //         const { id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parking;
+        //         searchParking.push(new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric));
+        //     };
+        // })
         return searchParking;
     }
 
-    public getParkingById(id: String): Parking {
-        let parkingFilter : any = data.filter((parking) => parking.id === id)[0];
-        const { name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parkingFilter;
-        let parking = new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric);
-        parking.setAvailabilityBikes(new Bike().getAllAvailabilityBikes(id));
-        return parking;
+    public getParkingById(id: String): any {
+        // let parkingFilter : any = data.filter((parking) => parking.id === id)[0];
+        // const { name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parkingFilter;
+        // let parking = new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric);
+        // parking.setAvailabilityBikes(new Bike().getAllAvailabilityBikes(id));
+        // return parking;
+    }
+
+    public setParkingService(parkingServiceInterface : ParkingServiceInterface) : Parking {
+        this.parkingServiceInterface = parkingServiceInterface;
+        return this;
     }
 
     public getId() : String {

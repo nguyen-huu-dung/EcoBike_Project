@@ -12,7 +12,7 @@ class HomeScreenHandler extends BaseScreenHandler {
     public show() : void {
         try {
             let listParking: Array<Parking> = this.getBController().getAllParking();
-            this.setContent({listParking, handler: this});
+            this.setContent({listParking});
             super.show();
         } catch (error) {
             
