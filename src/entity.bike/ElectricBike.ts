@@ -4,8 +4,8 @@ import * as Electrics from '../../assets/db/electricBike.json';
 
 class ElectricBike extends Bike {
 
-    private battery : Number;
-    private estimatingTime: Number;
+    private battery : number;
+    private estimatingTime: number;
 
     constructor(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId, battery, estimatingTime) {
         super(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
@@ -13,7 +13,7 @@ class ElectricBike extends Bike {
         this.estimatingTime = estimatingTime;
     }
 
-    public static getBikeById(bikeId: String): ElectricBike {
+    public static getBikeById(bikeId: string): ElectricBike {
         let bike : any = Bikes.filter((bike) => bike.id === bikeId)[0];
         let electric : any = Bikes.filter((bike) => bike.id === bikeId)[0];
         const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
@@ -22,20 +22,20 @@ class ElectricBike extends Bike {
         return bike;
     }
 
-    public getBattery() : Number {
+    public getBattery() : number {
         return this.battery;
     }
 
-    public setBattery(battery: Number) : ElectricBike {
+    public setBattery(battery: number) : ElectricBike {
         this.battery = battery;
         return this;
     }
 
-    public getEstimatingTime() : Number {
+    public getEstimatingTime() : number {
         return this.estimatingTime;
     }
 
-    public setEstimatingTime(estimatingTime: Number) : ElectricBike {
+    public setEstimatingTime(estimatingTime: number) : ElectricBike {
         this.estimatingTime = estimatingTime;
         return this;
     }

@@ -1,49 +1,99 @@
 import { Utils } from '../utils/Utils';
 import { Bike } from '../entity.bike/Bike';
 import { ParkingServiceInterface } from '../service/ParkingService/ParkingServiceInterface';
+import { BikeServiceInterface } from '../service/BikeService/BikeServiceInterface';
 
 class Parking {
 
     private parkingServiceInterface : ParkingServiceInterface;
 
-    private id: String;
-    private name: String;
-    private address: String;
-    private area: Number;
-    private numSingle: Number;
-    private numCouple: Number;
-    private numElectric: Number;
-    private numFreeSingle: Number;
-    private numFreeCouple: Number;
-    private numFreeElectric: Number;
+    private id: string;
+    private name: string;
+    private address: string;
+    private area: number;
+    private numSingle: number;
+    private numCouple: number;
+    private numElectric: number;
+    private numFreeSingle: number;
+    private numFreeCouple: number;
+    private numFreeElectric: number;
     private availabilityBikes: Array<any>;
 
-    public async getAllParking() {
-        let listParking = await this.parkingServiceInterface.getAllParking();
-        
-        return listParking;
+    constructor() {
+
     }
 
-    public searchParking(key: String): Array<Parking> {
-        let keyFormat: String = Utils.cleanAccents(key);
-        let searchParking: Array<Parking> = [];
-        // data.forEach((parking) => {
-        //     let nameFormat = Utils.cleanAccents(parking.name);
-        //     let addressFormat = Utils.cleanAccents(parking.address);
-        //     if(nameFormat.toLocaleLowerCase().includes(keyFormat as string) || addressFormat.toLocaleLowerCase().includes(keyFormat as string)) {
-        //         const { id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parking;
-        //         searchParking.push(new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric));
-        //     };
-        // })
-        return searchParking;
+    public async getAllParking() : Promise<Parking[]> {
+        try {
+            let list : Array<any> = await this.parkingServiceInterface.getAllParking();
+            let listParking : Array<Parking> = await Promise.all(list.map(async (parking, index) => {
+                const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
+                const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
+                const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
+                const newParking : Parking = new Parking()
+                                        .setId(parking.id)
+                                        .setName(parking.name)
+                                        .setAddress(parking.address)
+                                        .setNumFreeSingle(numFreeSingle)
+                                        .setNumFreeCouple(numFreeCouple)
+                                        .setNumFreeElectric(numFreeElectric);
+                return newParking;
+            }))
+            return listParking;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    public getParkingById(id: String): any {
-        // let parkingFilter : any = data.filter((parking) => parking.id === id)[0];
-        // const { name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric } = parkingFilter;
-        // let parking = new Parking(id, name, address, area, numSingle, numCouple, numElectric, numFreeSingle, numFreeCouple, numFreeElectric);
-        // parking.setAvailabilityBikes(new Bike().getAllAvailabilityBikes(id));
-        // return parking;
+    public async searchParking(key: string): Promise<Parking[]> {
+        try {
+            let list : Array<any> = await this.parkingServiceInterface.getAllParking();
+            const keyFormat : string = Utils.cleanAccents(key);
+            list = list.filter((parking) => {
+                const nameFormat = Utils.cleanAccents(parking.name);
+                const addressFormat = Utils.cleanAccents(parking.address);
+                return (nameFormat.toLocaleLowerCase().includes(keyFormat as string) || addressFormat.toLocaleLowerCase().includes(keyFormat as string))
+            })
+            let searchParking : Array<Parking> = await Promise.all(list.map(async (parking, index) => {
+                const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
+                const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
+                const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
+                const newParking : Parking = new Parking()
+                                        .setId(parking.id)
+                                        .setName(parking.name)
+                                        .setAddress(parking.address)
+                                        .setNumFreeSingle(numFreeSingle)
+                                        .setNumFreeCouple(numFreeCouple)
+                                        .setNumFreeElectric(numFreeElectric);
+                return newParking;
+            }))
+            return searchParking;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    public async getParkingById(parkingId: string): Promise<Parking> {
+        try {
+            const parking = await this.parkingServiceInterface.getParkingById(parkingId);
+            const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
+            const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
+            const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
+            const newParking : Parking = new Parking()
+                                    .setId(parking.id)
+                                    .setName(parking.name)
+                                    .setAddress(parking.address)
+                                    .setArea(parking.area)
+                                    .setNumSingle(parking.numSingle)
+                                    .setNumCouple(parking.numCouple)
+                                    .setNumElectric(parking.numElectric)
+                                    .setNumFreeSingle(numFreeSingle)
+                                    .setNumFreeCouple(numFreeCouple)
+                                    .setNumFreeElectric(numFreeElectric);
+            return newParking;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     public setParkingService(parkingServiceInterface : ParkingServiceInterface) : Parking {
@@ -51,90 +101,90 @@ class Parking {
         return this;
     }
 
-    public getId() : String {
+    public getId() : string {
         return this.id;
     }
 
-    private setId(id: String) : Parking {
+    private setId(id: string) : Parking {
         this.id = id;
         return this;
     }
 
-    public getName() : String {
+    public getName() : string {
         return this.name;
     }
 
-    public setName(name: String) : Parking {
+    public setName(name: string) : Parking {
         this.name = name;
         return this;
     }
 
-    public getAddress() : String {
+    public getAddress() : string {
         return this.address;
     }
 
-    public setAddress(address: String) : Parking {
+    public setAddress(address: string) : Parking {
         this.address = address;
         return this;
     }
 
-    public getArea() : Number {
+    public getArea() : number {
         return this.area;
     }
 
-    public setArea(area: Number) : Parking {
+    public setArea(area: number) : Parking {
         this.area = area;
         return this;
     }
 
-    public getNumSingle() : Number {
+    public getNumSingle() : number {
         return this.numSingle;
     }
 
-    public setNumsingle(numSingle: Number) : Parking {
+    public setNumSingle(numSingle: number) : Parking {
         this.numSingle = numSingle;
         return this;
     }
 
-    public getNumCouple() : Number {
+    public getNumCouple() : number {
         return this.numCouple;
     }
 
-    public setNumCouple(numCouple: Number) : Parking {
+    public setNumCouple(numCouple: number) : Parking {
         this.numCouple = numCouple;
         return this;
     }
 
-    public getNumElectric() : Number {
+    public getNumElectric() : number {
         return this.numElectric;
     }
 
-    public setNumElectric(numElectric: Number) : Parking {
+    public setNumElectric(numElectric: number) : Parking {
         this.numElectric = numElectric;
         return this;
     }
 
-    public getNumFreeSingle() : Number {
+    public getNumFreeSingle() : number {
         return this.numFreeSingle;
     }
 
-    public setNumFreeSingle(numFreeSingle: Number) : Parking {
+    public setNumFreeSingle(numFreeSingle: number) : Parking {
         this.numFreeSingle = numFreeSingle;
         return this;
     }
-    public getNumFreeCouple() : Number {
+    public getNumFreeCouple() : number {
         return this.numFreeCouple;
     }
 
-    public setNumFreeCouple(numFreeCouple: Number) : Parking {
+    public setNumFreeCouple(numFreeCouple: number) : Parking {
         this.numFreeCouple = numFreeCouple;
         return this;
     }
-    public getNumFreeElectric() : Number {
+    public getNumFreeElectric() : number {
         return this.numFreeElectric;
     }
 
-    public setNumFreeElectric(numFreeElectric: Number) : Parking {
+    public setNumFreeElectric(numFreeElectric: number) : Parking {
         this.numFreeElectric = numFreeElectric;
         return this;
     }

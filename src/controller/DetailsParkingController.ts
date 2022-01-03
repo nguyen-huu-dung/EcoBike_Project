@@ -12,7 +12,7 @@ class DetailsParkingController extends BaseController {
     }
 
 
-    public getParkingById(parkingId : String): Parking {
+    public getParkingById(parkingId : string): Promise<Parking> {
         try {
             return this.parking.getParkingById(parkingId);
         } catch (error) {

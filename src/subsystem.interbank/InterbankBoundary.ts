@@ -1,6 +1,6 @@
 class  InterbankBoundary {
 
-    public query(url : String, data: String) : void {
+    public query(url : string, data: string) : void {
 
     }
 

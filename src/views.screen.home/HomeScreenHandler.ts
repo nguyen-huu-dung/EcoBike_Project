@@ -9,9 +9,9 @@ class HomeScreenHandler extends BaseScreenHandler {
         this.setBController(new HomeController());
     }
 
-    public async show() {
+    public async show() : Promise<void> {
         try {
-            let listParking = await this.getBController().getAllParking();
+            let listParking : Parking[] = await this.getBController().getAllParking();
             this.setContent({listParking});
             super.show();
         } catch (error) {
@@ -19,9 +19,9 @@ class HomeScreenHandler extends BaseScreenHandler {
         }
     }
 
-    public search(key: String) : void {
+    public async search(key: string) : Promise<void> {
         try {
-            let listParking: Array<Parking> = this.getBController().searchParking(key);
+            let listParking : Parking[] = await this.getBController().searchParking(key);
             this.setContent({listParking});
             super.show();    
         } catch (error) {

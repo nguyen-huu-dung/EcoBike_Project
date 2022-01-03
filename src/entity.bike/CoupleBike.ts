@@ -7,7 +7,7 @@ class CoupleBike extends Bike {
         super(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
     }
 
-    public static getBikeById(bikeId: String): CoupleBike {
+    public static getBikeById(bikeId: string): CoupleBike {
         let bike : any = data.filter((bike) => bike.id === bikeId)[0];
         const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
         bike = new CoupleBike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);

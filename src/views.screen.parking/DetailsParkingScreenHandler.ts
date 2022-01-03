@@ -6,13 +6,11 @@ class DetailsParkingScreenHandler extends BaseScreenHandler {
 
     constructor(req, res, viewPath) {
         super(req, res, viewPath);
-        this.initialize();
+        this.setBController(new DetailsParkingController());
     }
 
-    public initialize(): void {
-        this.setBController(new DetailsParkingController());
-        let parkingInfo : Parking = this.getBController().getParkingById(this.req.query.parkingId);
-        console.log(parkingInfo);
+    public async show(): Promise<void> {
+        let parkingInfo : Parking = await this.getBController().getParkingById(this.req.query.parkingId);
         this.setContent({parkingInfo});
         this.show();
     }

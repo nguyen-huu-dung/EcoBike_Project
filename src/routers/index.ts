@@ -9,7 +9,7 @@ router.get('/', (req, res) => new SplashScreenHandler(req, res, 'SplashScreen').
 
 router.get('/home', (req, res) => {
     const homeScreenHandler = new HomeScreenHandler(req, res, 'HomeScreen')
-    const key : String = req.query.search as String;
+    const key : string = req.query.search as string;
     if(key === undefined || key === null) {
         homeScreenHandler.show();
     }
@@ -18,7 +18,7 @@ router.get('/home', (req, res) => {
     }
 });
 
-router.get('/parking', (req, res) => new DetailsParkingScreenHandler(req, res, 'DetailsParkingScreen'));
+router.get('/parking', (req, res) => new DetailsParkingScreenHandler(req, res, 'DetailsParkingScreen').show());
 
 router.get('/confirm-rent-bike', (req, res) => {
     res.render('ConfirmRentBikeScreen');

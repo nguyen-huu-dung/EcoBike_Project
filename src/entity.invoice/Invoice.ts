@@ -1,46 +1,46 @@
 class Invoice {
     
-    private id : String;
-    private totalPrice : Number;
-    private bikeId : String;
-    private createdAt : String;
+    private id : string;
+    private totalPrice : number;
+    private bikeId : string;
+    private createdAt : string;
 
     public saveInvoice() : void {
 
     }
 
-    public getId() : String {
+    public getId() : string {
         return this.id;
     }
 
-    public setId(id: String) : Invoice {
+    public setId(id: string) : Invoice {
         this.id = id;
         return this;
     }
 
-    public getTotalPrice() : Number {
+    public getTotalPrice() : number {
         return this.totalPrice;
     }
 
-    public setTotalPrice(totalPrice: Number) : Invoice {
+    public setTotalPrice(totalPrice: number) : Invoice {
         this.totalPrice = totalPrice;
         return this;
     }
 
-    public getBikeId() : String {
+    public getBikeId() : string {
         return this.bikeId;
     }
 
-    public setBikeId(bikeId: String) : Invoice {
+    public setBikeId(bikeId: string) : Invoice {
         this.bikeId = bikeId
         return this;
     }
 
-    public getCreatedAt() : String {
+    public getCreatedAt() : string {
         return this.createdAt;
     }
 
-    public setCreatedAt(createdAt: String) : Invoice {
+    public setCreatedAt(createdAt: string) : Invoice {
         this.createdAt = createdAt;
         return this;
     }

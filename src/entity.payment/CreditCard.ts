@@ -1,9 +1,9 @@
 class  CreditCard {
     
-    private cardCode : String;
-    private owner : String;
-    private cvvCode : String;
-    private dateExpired: String;
+    private cardCode : string;
+    private owner : string;
+    private cvvCode : string;
+    private dateExpired: string;
 
     constructor(cardCode, owner, cvvCode, dateExpired) {
         this.cardCode = cardCode;

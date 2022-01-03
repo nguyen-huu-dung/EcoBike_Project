@@ -2,68 +2,59 @@ import * as data from '../../assets/db/bike.json';
 
 class Bike {
 
-    protected id: String;
-    protected category: String;
-    protected barcode: String;
+    protected id: string;
+    protected category: string;
+    protected barcode: string;
     protected isRented: Boolean;
-    protected deposit: Number;
-    protected licensePlate: String;
-    protected rentalPrice: Array<Number>;
-    protected parkingId: String;
+    protected deposit: number;
+    protected licensePlate: string;
+    protected rentalPrice: Array<number>;
+    protected parkingId: string;
 
-    constructor(...params: any[]) {
-        if(params.length === 8) {
-            this.id = params[0];
-            this.category = params[1];
-            this.barcode = params[2];
-            this.isRented = params[3];
-            this.deposit = params[4];
-            this.licensePlate = params[5];
-            this.rentalPrice = params[6];
-            this.parkingId = params[7];
-        }
+    constructor() {
+
     }
 
-    public getAllAvailabilityBikes(parkingId: String): Array<Bike> {
-        let listBike : Array<Bike> = [];
-        data.forEach((bike) => {
-            if(bike.parkingId === parkingId && !bike.isRented ) {
-                listBike.push(this.getBikeById(bike.id));
-            }
-        })
-        return listBike;
+    public static getAllBikes(parkingId: string): any {
+        // let listBike : Array<Bike> = [];
+        // data.forEach((bike) => {
+        //     if(bike.parkingId === parkingId && !bike.isRented ) {
+        //         listBike.push(this.getBikeById(bike.id));
+        //     }
+        // })
+        // return listBike;
     }
 
-    public getBikeById(bikeId: String): Bike {
-        let bike : any = data.filter((bike) => bike.id === bikeId)[0];
-        const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
-        bike = new Bike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
-        return bike;
+    public getBikeById(bikeId: string): any {
+        // let bike : any = data.filter((bike) => bike.id === bikeId)[0];
+        // const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
+        // bike = new Bike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
+        // return bike;
     }
 
-    public getId() : String {
+    public getId() : string {
         return this.id;
     }
 
-    private setId(id: String) : Bike {
+    private setId(id: string) : Bike {
         this.id = id;
         return this;
     }
 
-    public getCategory() : String {
+    public getCategory() : string {
         return this.category;
     }
 
-    public setCategory(category: String) : Bike {
+    public setCategory(category: string) : Bike {
         this.category = category;
         return this;
     }
 
-    public getBarcode() : String {
+    public getBarcode() : string {
         return this.barcode;
     }
 
-    public setBarcode(barcode: String) : Bike {
+    public setBarcode(barcode: string) : Bike {
         this.barcode = barcode;
         return this;
     }
@@ -77,38 +68,38 @@ class Bike {
         return this;
     }
 
-    public getDeposit() : Number {
+    public getDeposit() : number {
         return this.deposit;
     }
 
-    public setDeposite(deposit: Number) : Bike {
+    public setDeposite(deposit: number) : Bike {
         this.deposit = deposit;
         return this;
     }
 
-    public getLicensePlate() : String {
+    public getLicensePlate() : string {
         return this.licensePlate;
     }
 
-    public setLicensePlatee(licensePlate: String) : Bike {
+    public setLicensePlatee(licensePlate: string) : Bike {
         this.licensePlate = licensePlate;
         return this;
     }
 
-    public getRentalPrice() : Array<Number> {
+    public getRentalPrice() : Array<number> {
         return this.rentalPrice;
     }
 
-    public setRentalPrice(rentalPrice: Array<Number>) : Bike {
+    public setRentalPrice(rentalPrice: Array<number>) : Bike {
         this.rentalPrice = rentalPrice;
         return this;
     }
 
-    public getParkingId() : String {
+    public getParkingId() : string {
         return this.parkingId;
     }
 
-    private setParkingId(parkingId: String) : Bike {
+    private setParkingId(parkingId: string) : Bike {
         this.parkingId = parkingId;
         return this;
     }

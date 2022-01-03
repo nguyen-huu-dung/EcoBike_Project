@@ -6,11 +6,11 @@ class InterbankSubsystemController {
     
     private static interbankBoundary : InterbankBoundary = new InterbankBoundary();
     
-    public payOrder(card : CreditCard, amount : Number, contents : String) : void{
+    public payOrder(card : CreditCard, amount : number, contents : string) : void{
 
     }
 
-    public refund(card : CreditCard, amount : Number, contents : String) : void{
+    public refund(card : CreditCard, amount : number, contents : string) : void{
 
     }
 }

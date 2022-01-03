@@ -1,12 +1,14 @@
 interface ParkingServiceInterface {
     
-    getAllParking() : any;
+    getAllParking() : Promise<any>;
 
-    getNumFreeSingleBikeByParkingId(id: string) : any;
+    getParkingById(parkingId : string) : Promise<any>;
 
-    getNumFreeCoupleBikeByParkingId(id: string) : any;
+    getNumFreeSingleBikeByParkingId(id: string) : Promise<any>;
 
-    getNumFreeElectricBikeByParkingId(id: string) : any;
+    getNumFreeCoupleBikeByParkingId(id: string) : Promise<any>;
+
+    getNumFreeElectricBikeByParkingId(id: string) : Promise<any>;
 }
 
 export { ParkingServiceInterface };
