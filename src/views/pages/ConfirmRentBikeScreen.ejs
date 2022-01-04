@@ -92,26 +92,38 @@
         <h3>Thông tin xe</h3>
         <div class="info-bike">
             <div class="info-1">
-                <div><strong class="width-130">Loại xe:</strong><span>Xe đạp đơn</span></div>
-                <div><strong class="width-130">Mã vạch:</strong><span>ECO00001</span></div>
-                <div><strong class="width-130">Tên bãi xe:</strong><span>Bãi xe Hai Bà trưng</span></div>
-                <div><strong class="width-130">Lượng pin:</strong><span>Không</span></div>
-                <div><strong class="width-130">Đặt cọc:</strong><span>400.000 </span>VND</div>
+                <div><strong class="width-130">Loại xe:</strong><span><%= invoice.bike.category %></span></div>
+                <div><strong class="width-130">Mã vạch:</strong><span><%= invoice.bike.barcode %></span></div>
+                <div><strong class="width-130">Tên bãi xe:</strong><span><%= invoice.bike.parkingName %></span></div>
+                <% if(invoice.bike.battery) { %>
+                  <div><strong class="width-130">Lượng pin:</strong><span><%= invoice.bike.battery %></span>%</div>
+                <% } else { %>
+                  <div><strong class="width-130">Lượng pin:</strong><span>Không</span></div>
+                <% } %>
+                <div><strong class="width-130">Đặt cọc:</strong><span><%= invoice.bike.deposit %></span> VND</div>
             </div>
             <div class="info-2">
-                <div><strong class="width-130">Thời gian:</strong><span>Không</span></div>
-                <div><strong class="width-130">Biển số xe:</strong>Không</div>
+                <% if(invoice.bike.battery) { %>
+                  <div><strong class="width-130">Thời gian:</strong><span><%= invoice.bike.estimatingTime %></span> phút</div>
+                <% } else { %>
+                  <div><strong class="width-130">Thời gian:</strong><span>Không</span></div>
+                <% } %>
+                <div><strong class="width-130">Biển số xe:</strong><%= invoice.bike.licensePlate %></div>
                 <div>
                   <strong class="width-130">Giá thuê:</strong>
                   <div class="rent-cost">
-                    <span> Dưới 10 phút: Miễn phí</span><br>
-                    <span> 30 phút đầu: 15.000 VND</span><br>
-                    <span>15 phút tiếp (lũy tiến): 3.000 VND</span>
+                    <span> Dưới 10 phút: <%= invoice.bike.rentalPrice[0] %></span> VND<br>
+                    <span> 30 phút đầu: <%= invoice.bike.rentalPrice[1] %></span> VND<br>
+                    <span>15 phút tiếp (lũy tiến): <%= invoice.bike.rentalPrice[2] %></span> VND
                   </div>
                 </div>
             </div>
+          </div>
+        <div>
+          <form action="/payment" method="post">
+            <button >Thuê xe</button>
+          </form>
         </div>
-        <button>Thuê xe</button>
     </div>
   </div>
 </body>

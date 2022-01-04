@@ -11,13 +11,22 @@ class ElectricBike extends Bike {
         super();
     }
 
-    public static getBikeById(bikeId: string) {
-        // let bike : any = Bikes.filter((bike) => bike.id === bikeId)[0];
-        // let electric : any = Bikes.filter((bike) => bike.id === bikeId)[0];
-        // const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
-        // const { battery, estimatingTime } = electric;
-        // bike = new ElectricBike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId, battery, estimatingTime);
-        // return bike;
+    public async getBikeById(bikeId: string) {
+        try {
+            const bike = await this.bikeServiceInterface.getBikeById(bikeId);
+            const newBike : Bike = new ElectricBike()
+                                        .setId(bike.id)
+                                        .setCategory(bike.category)
+                                        .setBarcode(bike.barcode)
+                                        .setIsRented(bike.isRented)
+                                        .setDeposit(bike.deposit)
+                                        .setLicensePlate(bike.licensePlate)
+                                        .setRentalPrice([bike.rentalPrice1, bike.rentalPrice2, bike.rentalPrice3])
+                                        .setParkingName(bike.name);
+            return newBike;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     public getBattery() : number {

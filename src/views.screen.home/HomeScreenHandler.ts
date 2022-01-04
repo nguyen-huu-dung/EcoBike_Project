@@ -1,29 +1,28 @@
 import { Parking } from "../entity.parking/Parking";
 import { HomeController } from "../controller/HomeController";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";
+import { Configs } from "../utils/Configs";
 
 class HomeScreenHandler extends BaseScreenHandler {
 
-    constructor(req, res, viewPath) {
-        super(req, res, viewPath);
+    constructor() {
+        super();
         this.setBController(new HomeController());
     }
 
-    public async show() : Promise<void> {
+    public async getAllParking() : Promise<void> {
         try {
             let listParking : Parking[] = await this.getBController().getAllParking();
-            this.setContent({listParking});
-            super.show();
+            this.show(Configs.VIEW_HOME_PATH, { listParking });
         } catch (error) {
             
         }
     }
 
-    public async search(key: string) : Promise<void> {
+    public async searchParking() : Promise<void> {
         try {
-            let listParking : Parking[] = await this.getBController().searchParking(key);
-            this.setContent({listParking});
-            super.show();    
+            let listParking : Parking[] = await this.getBController().searchParking(this.getReq().body.search);
+            this.show(Configs.VIEW_HOME_PATH, { listParking });    
         } catch (error) {
             
         }

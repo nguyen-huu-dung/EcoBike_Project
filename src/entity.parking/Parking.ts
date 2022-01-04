@@ -1,7 +1,8 @@
 import { Utils } from '../utils/Utils';
 import { Bike } from '../entity.bike/Bike';
 import { ParkingServiceInterface } from '../service/ParkingService/ParkingServiceInterface';
-import { BikeServiceInterface } from '../service/BikeService/BikeServiceInterface';
+import { BikeService } from '../service/BikeService/BikeService';
+import { SQLException } from '../common.exception/SQLException';
 
 class Parking {
 
@@ -76,21 +77,23 @@ class Parking {
     public async getParkingById(parkingId: string): Promise<Parking> {
         try {
             const parking = await this.parkingServiceInterface.getParkingById(parkingId);
-            // const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
-            // const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
-            // const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
-            // const newParking : Parking = new Parking()
-            //                         .setId(parking.id)
-            //                         .setName(parking.name)
-            //                         .setAddress(parking.address)
-            //                         .setArea(parking.area)
-            //                         .setNumSingle(parking.numSingle)
-            //                         .setNumCouple(parking.numCouple)
-            //                         .setNumElectric(parking.numElectric)
-            //                         .setNumFreeSingle(numFreeSingle)
-            //                         .setNumFreeCouple(numFreeCouple)
-            //                         .setNumFreeElectric(numFreeElectric);
-            return parking;
+            const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
+            const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
+            const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
+            const newParking : Parking = new Parking()
+                                    .setId(parking.id)
+                                    .setName(parking.name)
+                                    .setAddress(parking.address)
+                                    .setArea(parking.area)
+                                    .setNumSingle(parking.numSingle)
+                                    .setNumCouple(parking.numCouple)
+                                    .setNumElectric(parking.numElectric)
+                                    .setNumFreeSingle(numFreeSingle)
+                                    .setNumFreeCouple(numFreeCouple)
+                                    .setNumFreeElectric(numFreeElectric);
+            const availabilityBikes = (await new Bike().setBikeServiceInterface(new BikeService()).getAllBike()).filter((bike : Bike) => bike.getIsRented() === 0);
+            newParking.setAvailabilityBikes(availabilityBikes);
+            return newParking;
         } catch (error) {
             console.log(error);
         }

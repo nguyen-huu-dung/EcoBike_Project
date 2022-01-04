@@ -39,7 +39,7 @@
     }
     .content {
       background-color: rgb(241 241 241 / 57%);
-      height: calc(100vh - 150px);
+      max-height: calc(100vh - 150px);
       padding: 10px;
       display: flex;
       justify-content: space-between;
@@ -125,15 +125,15 @@
           <div><strong class="width-100">Diện tích:</strong><span><%= parkingInfo.area %> m2</span></div>
           <div><strong class="width-100">Sức chứa:</strong></div>
           <div>
-            <div><span class="width-100">Xe đạp đơn:</span> <span><%= parkingInfo.numSingle + parkingInfo.numFreeSingle %></span></div>
-            <div><span class="width-100">Xe đạp đôi:</span> <span><%= parkingInfo.numCouple + parkingInfo.numFreeCouple %></span></div>
-            <div><span class="width-100">Xe đạp điện:</span> <span><%= parkingInfo.numElectric + parkingInfo.numFreeElectric %></span></div>
+            <div><span class="width-100">Xe đạp đơn:</span> <span><%= parkingInfo.numSingle %></span></div>
+            <div><span class="width-100">Xe đạp đôi:</span> <span><%= parkingInfo.numCouple %></span></div>
+            <div><span class="width-100">Xe đạp điện:</span> <span><%= parkingInfo.numElectric %></span></div>
           </div>
           <div><strong>Xe khả dụng:</strong></div>
           <div>
-            <div><span class="width-100">Xe đạp đơn:</span><span><%= parkingInfo.numSingle %></span></div>
-            <div><span class="width-100">Xe đạp đôi:</span><span><%= parkingInfo.numCouple %></span></div>
-            <div><span class="width-100">Xe đạp điện:</span><span><%= parkingInfo.numElectric %></span></div>
+            <div><span class="width-100">Xe đạp đơn:</span><span><%= parkingInfo.numFreeSingle %></span></div>
+            <div><span class="width-100">Xe đạp đôi:</span><span><%= parkingInfo.numFreeCouple %></span></div>
+            <div><span class="width-100">Xe đạp điện:</span><span><%= parkingInfo.numFreeElectric %></span></div>
           </div>
         </div>
       </div>
@@ -145,10 +145,10 @@
               <div>
                 <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
                 <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
-                <div><strong class="width-100">Lượng pin:</strong><span><%= bike.battery %></span></div>
               </div>
-              <form action="/confirm-rent-bike" method="get">
+              <form action="/confirm-rent-bike" method="post">
                 <input type="hidden" name="bikeId" value=<%= bike.id %>>
+                <input type="hidden" name="category" value="<%= bike.category %>">
                 <button type="submit">Thuê xe</button>
               </form>
             </div>

@@ -1,18 +1,18 @@
 import { Parking } from "../entity.parking/Parking";
 import { DetailsParkingController } from "../controller/DetailsParkingController";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";
+import { Configs } from "../utils/Configs";
 
 class DetailsParkingScreenHandler extends BaseScreenHandler {
 
-    constructor(req, res, viewPath) {
-        super(req, res, viewPath);
+    constructor() {
+        super();
         this.setBController(new DetailsParkingController());
     }
 
-    public async show(): Promise<void> {
-        let parkingInfo : Parking = await this.getBController().getParkingById(this.req.query.parkingId);
-        this.setContent({parkingInfo});
-        this.show();
+    public async getParkingById(): Promise<void> {
+        let parkingInfo : Parking = await this.getBController().getParkingById(this.getReq().body.parkingId);
+        this.show(Configs.VIEW_PARKING_PATH, { parkingInfo });
     }
 
     public getBController(): DetailsParkingController {

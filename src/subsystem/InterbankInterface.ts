@@ -3,9 +3,9 @@ import { CreditCard } from "../entity.payment/CreditCard";
 
 interface InterbankInterface {
 
-    payOrder(card : CreditCard, amount : number, contents : string) : PaymentTransaction;
+    pay(card : CreditCard, amount : number, contents : string);
 
-    refund(card : CreditCard, amount : number, contents : string) : PaymentTransaction;
+    refund(card : CreditCard, amount : number, contents : string);
 }
 
 export { InterbankInterface };

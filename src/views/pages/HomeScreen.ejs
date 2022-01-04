@@ -78,6 +78,10 @@
     .avai-parking {
       margin-left: 30px;
     }
+    .rent-bike-btn {
+      border: none;
+      background-color: inherit;
+    }
   </style>
 </head>
 <body>
@@ -88,13 +92,15 @@
         <div class="name-app">EcoBike</div>
       </div>
       <div>
-        <form action='/home' method="get">
+        <form action='/home' method="post">
           <input type="text" id="search" name="search" placeholder="Tìm kiếm bãi xe">
           <button type="submit" id="search-btn">Tìm kiếm bãi xe</button>
         </form>
       </div>
       <div class="return-bike">
-        <img class="size-img-1" src="images/rent-bike.png" alt="return bike">
+        <form action="/rent-bike" method="get">
+          <button class="rent-bike-btn" type="submit"><img class="size-img-1" src="images/rent-bike.png" alt="return bike"></button>
+        </form>
       </div>
     </div>
     <% if(listParking === undefined || listParking.length === 0) { %>
@@ -106,7 +112,7 @@
             <div class="name-parking"><%=  parking.name %></div>
             <div class="address-parking"><%= parking.address %></div>
             <div class="details-parking">
-              <form action='/parking' method="get">
+              <form action='/parking' method="post" enctype="application/x-www-form-urlencoded">
                 <input type="hidden" name="parkingId" value=<%= parking.id %>>
                 <button type="submit">Chi tiết</button>
               </form>

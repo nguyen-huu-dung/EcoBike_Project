@@ -1,8 +1,8 @@
 interface BikeServiceInterface {
 
-    getAllBikeByParkingId () : Promise<any>;
+    getAllBike() : Promise<any>;
 
-    getBikeById () : Promise<any>;
+    getBikeById(bikeId : string) : Promise<any>;
 }
 
 export { BikeServiceInterface };

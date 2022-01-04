@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as path from 'path';
+import * as bodyParser from 'body-parser';
 import router from './routers';
 
 class App {
@@ -12,7 +13,8 @@ class App {
     }
     
     private config(): void {
-        this.app.use(express.json()); // use data json
+        this.app.use(bodyParser.urlencoded({extended: true})); // use data json
+        this.app.use(bodyParser.json());
         this.app.use(express.static('assets'));
         this.app.set('view engine', 'ejs'); // set template engine is ejs
         this.app.set('views', path.join(__dirname, 'views/pages')); // set path folder views

@@ -1,42 +1,68 @@
-import * as data from '../../assets/db/bike.json';
+import { BikeServiceInterface } from '../service/BikeService/BikeServiceInterface';
 
 class Bike {
+
+    protected bikeServiceInterface : BikeServiceInterface;
 
     protected id: string;
     protected category: string;
     protected barcode: string;
-    protected isRented: Boolean;
+    protected isRented: number;
     protected deposit: number;
     protected licensePlate: string;
     protected rentalPrice: Array<number>;
-    protected parkingId: string;
+    protected parkingName: string;
 
     constructor() {
 
     }
 
-    public static getAllBikes(parkingId: string): any {
-        // let listBike : Array<Bike> = [];
-        // data.forEach((bike) => {
-        //     if(bike.parkingId === parkingId && !bike.isRented ) {
-        //         listBike.push(this.getBikeById(bike.id));
-        //     }
-        // })
-        // return listBike;
+    public async getAllBike(): Promise<Bike[]> {
+        try {
+            let list = await this.bikeServiceInterface.getAllBike();
+            list = list.map((bike) => {
+                const newBike = new Bike()
+                                    .setId(bike.id)
+                                    .setCategory(bike.category)
+                                    .setBarcode(bike.barcode)
+                                    .setIsRented(bike.isRented)
+                                    .setLicensePlate(bike.licensePlate);
+                return newBike;
+            })
+            return list;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    public getBikeById(bikeId: string): any {
-        // let bike : any = data.filter((bike) => bike.id === bikeId)[0];
-        // const { id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId } = bike;
-        // bike = new Bike(id, category, barcode, isRented, deposit, licensePlate, rentalPrice, parkingId);
-        // return bike;
+    public async getBikeById(bikeId: string): Promise<any> {
+        try {
+            const bike = await this.bikeServiceInterface.getBikeById(bikeId);
+            const newBike : Bike = new Bike()
+                                        .setId(bike.id)
+                                        .setCategory(bike.category)
+                                        .setBarcode(bike.barcode)
+                                        .setIsRented(bike.isRented)
+                                        .setDeposit(bike.deposit)
+                                        .setLicensePlate(bike.licensePlate)
+                                        .setRentalPrice([bike.rentalPrice1, bike.rentalPrice2, bike.rentalPrice3])
+                                        .setParkingName(bike.name);
+            return newBike;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    public setBikeServiceInterface(bikeServiceInterface : BikeServiceInterface) : Bike {
+        this.bikeServiceInterface = bikeServiceInterface;
+        return this;
     }
 
     public getId() : string {
         return this.id;
     }
 
-    private setId(id: string) : Bike {
+    public setId(id: string) : Bike {
         this.id = id;
         return this;
     }
@@ -59,11 +85,11 @@ class Bike {
         return this;
     }
 
-    public getIsRented() : Boolean {
+    public getIsRented() : number {
         return this.isRented;
     }
 
-    public setIsRented(isRented: Boolean) : Bike {
+    public setIsRented(isRented: number) : Bike {
         this.isRented = isRented;
         return this;
     }
@@ -72,7 +98,7 @@ class Bike {
         return this.deposit;
     }
 
-    public setDeposite(deposit: number) : Bike {
+    public setDeposit(deposit: number) : Bike {
         this.deposit = deposit;
         return this;
     }
@@ -81,7 +107,7 @@ class Bike {
         return this.licensePlate;
     }
 
-    public setLicensePlatee(licensePlate: string) : Bike {
+    public setLicensePlate(licensePlate: string) : Bike {
         this.licensePlate = licensePlate;
         return this;
     }
@@ -95,12 +121,12 @@ class Bike {
         return this;
     }
 
-    public getParkingId() : string {
-        return this.parkingId;
+    public getParkingName() : string {
+        return this.parkingName;
     }
 
-    private setParkingId(parkingId: string) : Bike {
-        this.parkingId = parkingId;
+    public setParkingName(parkingName: string) : Bike {
+        this.parkingName = parkingName;
         return this;
     }
 }

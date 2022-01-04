@@ -21,6 +21,18 @@ class Utils {
     
         return str;
     }
+
+    public static getTimeNow() : string {
+        const time = new Date();
+        const timeStr : string =
+            time.getFullYear() + "/" + ("00" + (time.getMonth() + 1)).slice(-2) + "/" +
+            ("00" + time.getDate()).slice(-2) + " " +
+            ("00" + time.getHours()).slice(-2) + ":" +
+            ("00" + time.getMinutes()).slice(-2) + ":" +
+            ("00" + time.getSeconds()).slice(-2);
+       
+        return timeStr;
+    }
 }
 
 export { Utils };

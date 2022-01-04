@@ -92,19 +92,19 @@
                 <label class="disabled" for="">Thẻ tín dụng</label>
             </div>
             <div>
-                <form>
+                <form action="/result" method="post">
                     <label for="card-code">Số thẻ:</label><br>
-                    <input type="text" id="card-code"><br>
+                    <input type="text" id="card-code" name="cardCode" value="kscq1_group14_2021"><br>
                     <label for="">Tên chủ thẻ:</label><br>
-                    <input type="text"><br>
+                    <input type="text" name="owner" value="Group 14"><br>
                     <label for="">Ngày hết hạn:</label><br>
-                    <input type="text"><br>
+                    <input type="text" name="dateExpired" value="1125"><br>
                     <label for="">Mã bảo mật:</label><br>
-                    <input type="text">
+                    <input type="text" name="cvvCode" value="786">
+                    <button type="submit">Xác nhận thanh toán</button>
                 </form>
             </div>
         </div>
-        <button>Xác nhận thanh toán</button>
     </div>
   </div>
 </body>

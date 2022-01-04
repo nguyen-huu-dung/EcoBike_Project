@@ -47,9 +47,14 @@
       align-items: center;
     }
     .content div:first-child {
-       color: green;
        font-size: 40px;
        font-weight: 750;
+    }
+    .success{
+      color: green;
+    }
+    .failed {
+      color: red;
     }
     button {
       align-self: center;
@@ -75,9 +80,16 @@
       </div>
     </div>
     <div class="content">
-        <div>Thanh toán thành công</div>
-        <div>Tin nhắn</div>
-        <button>OK</button>
+        <% if(response.errorCode === "00") { %>
+          <div class="success">Thanh toán thành công</div>
+          <div class="success"><%= response.message %></div>
+        <% } else { %>
+          <div class="failed">Thanh toán thất bại</div>
+          <div class="failed"><%= response.message %></div>
+        <% } %>
+        <form action="/home">
+          <button type="submit">OK</button>
+        </form>
     </div>
   </div>
 </body>

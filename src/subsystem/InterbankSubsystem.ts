@@ -11,12 +11,12 @@ class InterbankSubsystem implements InterbankInterface {
         this.interbankSubsystemController = new InterbankSubsystemController();
     }
 
-    payOrder(card: CreditCard, amount: number, contents: string): PaymentTransaction {
-        
+    public pay(card: CreditCard, amount: number, contents: string) {
+        return this.interbankSubsystemController.pay(card, amount, contents);
     }
 
-    refund(card: CreditCard, amount: number, contents: string): PaymentTransaction {
-        
+    public async refund(card: CreditCard, amount: number, contents: string) {
+        return this.interbankSubsystemController.refund(card, amount, contents);
     }
 }
 

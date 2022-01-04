@@ -1,12 +1,22 @@
+import { Utils } from "../utils/Utils";
+
 class Invoice {
     
     private id : string;
     private totalPrice : number;
-    private bikeId : string;
+    private bike : any;
     private createdAt : string;
 
-    public saveInvoice() : void {
+    constructor() {
 
+    }
+
+    public static createInvoice(bike, totalPrice) {
+        return new Invoice().setBike(bike).setTotalPrice(totalPrice).setCreatedAt(Utils.getTimeNow());
+    }
+
+    public saveInvoice() : void {
+        
     }
 
     public getId() : string {
@@ -27,12 +37,12 @@ class Invoice {
         return this;
     }
 
-    public getBikeId() : string {
-        return this.bikeId;
+    public getBike() : string {
+        return this.bike;
     }
 
-    public setBikeId(bikeId: string) : Invoice {
-        this.bikeId = bikeId
+    public setBike(bike: any) : Invoice {
+        this.bike = bike;
         return this;
     }
 
