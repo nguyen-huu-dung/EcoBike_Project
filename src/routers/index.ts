@@ -3,16 +3,18 @@ import { Router } from "express";
 import { DetailsParkingScreenHandler } from "../views.screen.parking/DetailsParkingScreenHandler";
 import { HomeScreenHandler } from "../views.screen.home/HomeScreenHandler";
 import { SplashScreenHandler } from "../views.screen/SplashScreenHandler";
-import { ConfirmRentBikeScreenHandler } from "../views.screen.rent/ConfirmRentBikeScreenHandler";
+import { InvoiceRentScreenHandler } from "../views.screen.rent/InvoiceRentScreenHandler";
 import { InterbankSubsystemController } from '../subsystem.interbank/InterbankSubsystemController';
 import { Configs } from '../utils/Configs';
 import { PaymentScreenHandler } from '../views.screen.payment/PaymentScreenHandler';
+import { InvoiceReturnScreenHandler } from '../views.screen.rent/InvoiceReturnScreenHandler';
 
 const splashScreenHandler : SplashScreenHandler = new SplashScreenHandler();
 const homeScreenHandler : HomeScreenHandler = new HomeScreenHandler();
 const detailsParkingScreenController : DetailsParkingScreenHandler = new DetailsParkingScreenHandler();
-const confirmRentBikeScreenHandler : ConfirmRentBikeScreenHandler = new ConfirmRentBikeScreenHandler();
+const invoiceRentScreenHandler : InvoiceRentScreenHandler = new InvoiceRentScreenHandler();
 export const paymentScreenHandler : PaymentScreenHandler = new PaymentScreenHandler();
+const invoiceReturnScreenHandler : InvoiceReturnScreenHandler = new InvoiceReturnScreenHandler();
 
 const router = Router();
 
@@ -38,14 +40,14 @@ router.post('/parking', (req, res) => {
 });
 
 router.post('/confirm-rent-bike', (req, res) => {
-    confirmRentBikeScreenHandler.setReq(req).setRes(res);
-    confirmRentBikeScreenHandler.rentBike();
+    invoiceRentScreenHandler.setReq(req).setRes(res);
+    invoiceRentScreenHandler.rentBike();
 })
 
 router.post('/payment', (req, res) => {
-    confirmRentBikeScreenHandler.setReq(req).setRes(res);
+    invoiceRentScreenHandler.setReq(req).setRes(res);
     paymentScreenHandler.setReq(req).setRes(res);
-    confirmRentBikeScreenHandler.confirmRentBike();
+    invoiceRentScreenHandler.invoiceRent();
 })
 
 router.post('/result', (req, res) => {
@@ -54,7 +56,8 @@ router.post('/result', (req, res) => {
 })
 
 router.get('/rent-bike', (req, res) => {
-    
+    invoiceReturnScreenHandler.setReq(req).setRes(res);
+    invoiceReturnScreenHandler.requestToReturnBike();
 })
 
 router.get('/return-bike', (req, res) => {

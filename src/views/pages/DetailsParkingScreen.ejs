@@ -39,7 +39,7 @@
     }
     .content {
       background-color: rgb(241 241 241 / 57%);
-      max-height: calc(100vh - 150px);
+      height: calc(100vh - 150px);
       padding: 10px;
       display: flex;
       justify-content: space-between;
@@ -66,9 +66,12 @@
       font-size: 30px;
       margin-bottom: 20px;
     }
-    .list-bike {
+    .list {
       width: 60%;
       background-color: white;
+    }
+    .list-bike {
+      height: fit-content;
       padding: 10px;
       display: flex;
       justify-content: space-between;
@@ -112,9 +115,9 @@
         <div class="text-1">|</div>
         <div class="text-1">Bãi xe</div>
       </div>
-      <div class="return">
+      <!-- <div class="return">
         <img class="size-img-2" src="images/return.png" alt="return bike">
-      </div>
+      </div> -->
     </div>
     <div class="content">
       <div class="info-parking">
@@ -137,23 +140,25 @@
           </div>
         </div>
       </div>
-      <div class="list-bike">
-        <% parkingInfo.availabilityBikes.forEach((bike) => { %>
-          <div class="bike">
-            <h4><%= bike.category %></h4>
-            <div class="info-bike">
-              <div>
-                <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
-                <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
+      <div class="list">
+        <div class="list-bike">
+          <% parkingInfo.availabilityBikes.forEach((bike) => { %>
+            <div class="bike">
+              <h4><%= bike.category %></h4>
+              <div class="info-bike">
+                <div>
+                  <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
+                  <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
+                </div>
+                <form action="/confirm-rent-bike" method="post">
+                  <input type="hidden" name="bikeId" value=<%= bike.id %>>
+                  <input type="hidden" name="category" value="<%= bike.category %>">
+                  <button type="submit">Thuê xe</button>
+                </form>
               </div>
-              <form action="/confirm-rent-bike" method="post">
-                <input type="hidden" name="bikeId" value=<%= bike.id %>>
-                <input type="hidden" name="category" value="<%= bike.category %>">
-                <button type="submit">Thuê xe</button>
-              </form>
             </div>
-          </div>
-        <% }) %>
+          <% }) %>
+        </div>
       </div>
     </div>
   </div>

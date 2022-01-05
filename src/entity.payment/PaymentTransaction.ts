@@ -1,3 +1,4 @@
+import { PaymentServiceInterface } from "../service/PaymentService/PaymentServiceInterface";
 import { CreditCard } from "./CreditCard";
 
 class PaymentTransaction {
@@ -7,19 +8,39 @@ class PaymentTransaction {
     private transactionContent : string;
     private createdAt : string;
     private transactionId : string;
-    private invoiceId : string;
+    private paymentServiceInterface : PaymentServiceInterface;
 
-    constructor(command, transactionContent, createdAt, invoiceId) {
+    constructor(command, transactionContent, createdAt, transactionId) {
         this.command = command;
         this.transactionContent = transactionContent;
         this.createdAt = createdAt;
-        this.invoiceId = invoiceId;
+        this.transactionId = transactionId;
     }
 
     public savePaymentTransaction() : void {
-
+        return this.paymentServiceInterface.savePaymentTransaction(this);
     }
 
+    public setPaymentServiceInterface(paymentServiceInterface : PaymentServiceInterface) : PaymentTransaction {
+        this.paymentServiceInterface = paymentServiceInterface;
+        return this;
+    }
+
+    public getTransactionId() : string {
+        return this.transactionId;
+    }
+
+    public getTransactionContent() : string {
+        return this.transactionContent;
+    }
+
+    public getCommand() : string {
+        return this.command;
+    }
+
+    public getCreatedAt() : string {
+        return this.createdAt;
+    }
 }
 
 export { PaymentTransaction };

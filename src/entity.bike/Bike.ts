@@ -12,6 +12,7 @@ class Bike {
     protected licensePlate: string;
     protected rentalPrice: Array<number>;
     protected parkingName: string;
+    protected parkingId: string;
 
     constructor() {
 
@@ -26,7 +27,8 @@ class Bike {
                                     .setCategory(bike.category)
                                     .setBarcode(bike.barcode)
                                     .setIsRented(bike.isRented)
-                                    .setLicensePlate(bike.licensePlate);
+                                    .setLicensePlate(bike.licensePlate)
+                                    .setParkingId(bike.parkingId);
                 return newBike;
             })
             return list;
@@ -46,12 +48,23 @@ class Bike {
                                         .setDeposit(bike.deposit)
                                         .setLicensePlate(bike.licensePlate)
                                         .setRentalPrice([bike.rentalPrice1, bike.rentalPrice2, bike.rentalPrice3])
-                                        .setParkingName(bike.name);
+                                        .setParkingName(bike.name)
+                                        .setParkingId(bike.parkingId)
+                                        .setBikeServiceInterface(this.bikeServiceInterface);
             return newBike;
         } catch (error) {
             console.log(error);
         }
     }
+
+    public async updateIsRentedBikeById(bikeId : string, value : number) {
+        try {
+            const updateBike = await this.bikeServiceInterface.updateIsRentedBikeById(bikeId, value);
+            return updateBike;
+        } catch (error) {
+            
+        }
+    } 
 
     public setBikeServiceInterface(bikeServiceInterface : BikeServiceInterface) : Bike {
         this.bikeServiceInterface = bikeServiceInterface;
@@ -118,6 +131,15 @@ class Bike {
 
     public setRentalPrice(rentalPrice: Array<number>) : Bike {
         this.rentalPrice = rentalPrice;
+        return this;
+    }
+
+    public getParkingId() : string {
+        return this.parkingId;
+    }
+
+    public setParkingId(parkingId: string) : Bike {
+        this.parkingId = parkingId;
         return this;
     }
 

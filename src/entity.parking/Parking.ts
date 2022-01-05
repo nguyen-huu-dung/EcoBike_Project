@@ -91,11 +91,19 @@ class Parking {
                                     .setNumFreeSingle(numFreeSingle)
                                     .setNumFreeCouple(numFreeCouple)
                                     .setNumFreeElectric(numFreeElectric);
-            const availabilityBikes = (await new Bike().setBikeServiceInterface(new BikeService()).getAllBike()).filter((bike : Bike) => bike.getIsRented() === 0);
+            const availabilityBikes = (await new Bike().setBikeServiceInterface(new BikeService()).getAllBike()).filter((bike : Bike) => bike.getIsRented() === 0 && bike.getParkingId() == parkingId);
             newParking.setAvailabilityBikes(availabilityBikes);
             return newParking;
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    public async getAllAvailabilityParking() {
+        try {
+            const listAllParking = await this.getAllParking();
+        } catch (error) {
+            
         }
     }
 

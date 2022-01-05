@@ -101,11 +101,16 @@
                     <input type="text" name="dateExpired" value="1125"><br>
                     <label for="">Mã bảo mật:</label><br>
                     <input type="text" name="cvvCode" value="786">
-                    <button type="submit">Xác nhận thanh toán</button>
                 </form>
             </div>
         </div>
+        <button id="payment-btn">Xác nhận thanh toán</button>
     </div>
   </div>
+  <script>
+    document.getElementById('payment-btn').addEventListener('click', () => {
+      document.querySelector('form').submit();
+    })
+  </script>
 </body>
 </html>

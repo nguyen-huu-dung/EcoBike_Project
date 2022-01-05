@@ -18,12 +18,23 @@ class SingleBike extends Bike {
                                         .setDeposit(bike.deposit)
                                         .setLicensePlate(bike.licensePlate)
                                         .setRentalPrice([bike.rentalPrice1, bike.rentalPrice2, bike.rentalPrice3])
-                                        .setParkingName(bike.name);
+                                        .setParkingName(bike.name)
+                                        .setParkingId(bike.parkingId)
+                                        .setBikeServiceInterface(this.bikeServiceInterface);
             return newBike;
         } catch (error) {
             console.log(error);
         }
     }
+
+    public async updateIsRentedBikeById(bikeId : string, value : number) {
+        try {
+            const updateBike = await this.bikeServiceInterface.updateIsRentedBikeById(bikeId, value);
+            return updateBike;
+        } catch (error) {
+            console.log(error);
+        }
+    } 
 }
 
 export { SingleBike };

@@ -1,30 +1,38 @@
+import { Bike } from "../entity.bike/Bike";
+import { PaymentTransaction } from "../entity.payment/PaymentTransaction";
+import { InvoiceServiceInterface } from "../service/InvoiceService/InvoiceServiceInterface";
 import { Utils } from "../utils/Utils";
 
 class Invoice {
     
-    private id : string;
+    private invoiceServiceInterface : InvoiceServiceInterface;
+
     private totalPrice : number;
-    private bike : any;
+    private bike : Bike;
     private createdAt : string;
+    private paymentTransaction : PaymentTransaction;
 
     constructor() {
 
     }
 
-    public static createInvoice(bike, totalPrice) {
-        return new Invoice().setBike(bike).setTotalPrice(totalPrice).setCreatedAt(Utils.getTimeNow());
+    public static createInvoice(bike, totalPrice, invoiceServiceInterface) {
+        return new Invoice().setBike(bike)
+                            .setTotalPrice(totalPrice)
+                            .setCreatedAt(Utils.getTimeNow())
+                            .setInvoiceServiceInterface(invoiceServiceInterface);
     }
 
     public saveInvoice() : void {
-        
+        try {
+            this.invoiceServiceInterface.saveInvoice(this);
+        } catch (error) {
+            
+        }
     }
 
-    public getId() : string {
-        return this.id;
-    }
-
-    public setId(id: string) : Invoice {
-        this.id = id;
+    public setInvoiceServiceInterface(invoiceServiceInterface : InvoiceServiceInterface) : Invoice {
+        this.invoiceServiceInterface = invoiceServiceInterface;
         return this;
     }
 
@@ -37,11 +45,11 @@ class Invoice {
         return this;
     }
 
-    public getBike() : string {
+    public getBike() : Bike {
         return this.bike;
     }
 
-    public setBike(bike: any) : Invoice {
+    public setBike(bike: Bike) : Invoice {
         this.bike = bike;
         return this;
     }
@@ -52,6 +60,15 @@ class Invoice {
 
     public setCreatedAt(createdAt: string) : Invoice {
         this.createdAt = createdAt;
+        return this;
+    }
+
+    public getPaymentTransaction() : PaymentTransaction {
+        return this.paymentTransaction;
+    }
+
+    public setPaymentTransaction(paymentTransaction : PaymentTransaction) : Invoice {
+        this.paymentTransaction = paymentTransaction;
         return this;
     }
 }

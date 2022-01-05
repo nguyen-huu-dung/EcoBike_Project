@@ -8,8 +8,29 @@ class InterbankSubsystemController {
 
     private interbankBoundary : InterbankBoundary = new InterbankBoundary();
 
-    public refund(card : CreditCard, amount : number, contents : string){
+    public async refund(card : CreditCard, amount : number, contents : string){
+        const data = {
+            "version": API.VERSION,
+            "transaction": {
+                "cardCode": card.getCardCode(),
+                "owner": card.getOwner(),
+                "cvvCode": card.getCvvCode(),
+                "dateExpired": card.getDateExpired(),
+                "command": API.REFUND_COMMAND,
+                "transactionContent": contents,
+                "amount": amount,
+                "createdAt": Utils.getTimeNow()
+            },
+            "appCode": API.APP_CODE,
+            "hashCode": API.HASH_CODE
+        };
 
+        try {
+            const response = await this.interbankBoundary.query(API.PAY_URL, data);
+            return this.processResponse(response.data);
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     public async pay(card : CreditCard, amount : number, contents : string){

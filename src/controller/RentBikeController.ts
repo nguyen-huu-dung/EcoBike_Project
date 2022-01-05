@@ -7,6 +7,7 @@ import { SingleBike } from "../entity.bike/SingleBike";
 import { CoupleBike } from "../entity.bike/CoupleBike";
 import { ElectricBike } from "../entity.bike/ElectricBike";
 import { paymentScreenHandler } from "../routers";
+import { InvoiceService } from "../service/InvoiceService/InvoiceService";
 
 class RentBikeController extends BaseController {
 
@@ -44,12 +45,12 @@ class RentBikeController extends BaseController {
     
     public async rentBike(bikeId : string) {
         const bike =  await this.bike.getBikeById(bikeId);
-        const invoice = Invoice.createInvoice(bike, bike.deposit);
+        const invoice = Invoice.createInvoice(bike, bike.deposit, new InvoiceService());
         return invoice;
     }
 
 
-    public async confirmRentBike(invoice : Invoice) {
+    public async invoiceRent(invoice : Invoice) {
         paymentScreenHandler.setInvoice(invoice).requestToPayment();
     }
 }
