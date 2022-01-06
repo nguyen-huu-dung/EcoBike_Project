@@ -3,7 +3,7 @@ import { RentBikeController } from "../controller/RentBikeController";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";
 import { Invoice } from "../entity.invoice/Invoice";
 
-class InvoiceRentScreenHandler extends BaseScreenHandler {
+class DetailsBikeScreenHandler extends BaseScreenHandler {
 
     private invoice : Invoice;
     
@@ -34,4 +34,4 @@ class InvoiceRentScreenHandler extends BaseScreenHandler {
     }
 }
 
-export { InvoiceRentScreenHandler };
+export { DetailsBikeScreenHandler };

@@ -11,7 +11,7 @@ class  Configs {
     public static VIEW_SPLASH_PATH = "SplashScreen";
     public static VIEW_HOME_PATH = "HomeScreen";
     public static VIEW_PARKING_PATH = "DetailsParkingScreen";
-    public static VIEW_INVOICE_RENT_PATH = "InvoiceRentScreen";
+    public static VIEW_INVOICE_RENT_PATH = "DetailsBikeScreen";
     public static VIEW_PAYMENT_PATH = "PaymentScreen";
     public static VIEW_RENT_BIKE_PATH = "RentBikeScreen";
     public static VIEW_RETURN_PATH = "ReturnBikeScreen";
