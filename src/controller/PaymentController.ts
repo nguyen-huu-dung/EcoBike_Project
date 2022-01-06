@@ -33,7 +33,7 @@ class PaymentController extends BaseController {
                 }
                 else if (card.type === "return") {
                     await invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 0);
-                    await invoice.getBike().updateParkingIdById(invoice.getBike().getId(), card.parkingId);
+                    await invoice.getBike().updateParkingIdByBikeId(invoice.getBike().getId(), card.parkingId);
                     await new UserService().updateUser(0, 0);
                 }
                 await invoice.saveInvoice();

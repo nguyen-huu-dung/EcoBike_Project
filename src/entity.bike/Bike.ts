@@ -70,9 +70,9 @@ class Bike {
         }
     } 
 
-    public async updateParkingIdById(bikeId : string, parkingId : string) {
+    public async updateParkingIdByBikeId(bikeId : string, parkingId : string) {
         try {
-            const updateBike = await this.bikeServiceInterface.updateParkingIdById(bikeId, parkingId);
+            const updateBike = await this.bikeServiceInterface.updateParkingIdByBikeId(bikeId, parkingId);
             return updateBike;
         } catch (error) {
             return new SQLException().getError();

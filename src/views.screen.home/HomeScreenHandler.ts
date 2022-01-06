@@ -10,12 +10,12 @@ class HomeScreenHandler extends BaseScreenHandler {
         this.setBController(new HomeController());
     }
 
-    public async getAllParking() : Promise<void> {
+    public async getAllParking() {
         let data = await this.getBController().getAllParking();
         this.show(Configs.VIEW_HOME_PATH, { data });
     }
 
-    public async searchParking() : Promise<void> {
+    public async searchParking() {
         let data = await this.getBController().searchParking(this.getReq().body.search);
         this.show(Configs.VIEW_HOME_PATH, { data });    
     }  

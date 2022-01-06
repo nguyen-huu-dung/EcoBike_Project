@@ -64,7 +64,7 @@ class RentBikeController extends BaseController {
     }
 
 
-    public async invoiceRent(invoice : Invoice) {
+    public async confirmRentBike(invoice : Invoice) {
         paymentScreenHandler.setInvoice(invoice).requestToPayment();
     }
 

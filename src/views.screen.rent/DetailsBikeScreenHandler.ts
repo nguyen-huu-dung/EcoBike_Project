@@ -12,7 +12,7 @@ class DetailsBikeScreenHandler extends BaseScreenHandler {
         this.setBController(new RentBikeController());
     }
 
-    public async rentBike() : Promise<any> {
+    public async rentBike() {
         this.getBController().setBike(this.getReq().body.category);
         const data = await this.getBController().rentBike(this.getReq().body.bikeId, this.getReq().body.userId);
         if(!data.error) {
@@ -21,8 +21,8 @@ class DetailsBikeScreenHandler extends BaseScreenHandler {
         super.show(Configs.VIEW_INVOICE_RENT_PATH, { data });
     }
 
-    public async invoiceRent() {
-        this.getBController().invoiceRent(this.invoice);
+    public async confirmRentBike() {
+        this.getBController().confirmRentBike(this.invoice);
     }
 
     public setInvoice(invoice : Invoice) {

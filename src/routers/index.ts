@@ -48,7 +48,7 @@ router.post('/payment', (req, res) => {
     paymentScreenHandler.setReq(req).setRes(res);
     if(req.body.type === "rent") {
         detailsBikeScreenHandler.setReq(req).setRes(res);
-        detailsBikeScreenHandler.invoiceRent();
+        detailsBikeScreenHandler.confirmRentBike();
     }
     else if (req.body.type === "return") {
         returnBikeScreenHandler.setReq(req).setRes(res);

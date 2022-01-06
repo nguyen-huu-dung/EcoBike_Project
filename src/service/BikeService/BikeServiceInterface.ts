@@ -6,7 +6,7 @@ interface BikeServiceInterface {
     
     updateIsRentedBikeById(bikeId : string, value : number) : Promise<any>;
 
-    updateParkingIdById(bikeId : string, parkingId : string) : Promise<any>;
+    updateParkingIdByBikeId(bikeId : string, parkingId : string) : Promise<any>;
 }
 
 export { BikeServiceInterface };

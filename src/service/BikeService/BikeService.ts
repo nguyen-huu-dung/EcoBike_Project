@@ -40,7 +40,7 @@ class BikeService implements BikeServiceInterface {
         })
     }
 
-    updateParkingIdById(bikeId: string, parkingId: string): Promise<any> {
+    updateParkingIdByBikeId(bikeId: string, parkingId: string): Promise<any> {
         return new Promise((resolve, reject) => {
 
             console.log(bikeId, parkingId);
