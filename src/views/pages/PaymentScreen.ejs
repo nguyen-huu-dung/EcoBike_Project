@@ -75,13 +75,12 @@
   <div class="container">
     <div class="header">
       <div class="logo">
-        <img class="size-img-1" src="images/logo.png" alt="logo">
+        <form action="/home" method="get">
+          <button class="logo-btn" type="submit"><img class="size-img-1" src="images/logo.png" alt="logo"></button>
+        </form>
         <div class="name-app text-1">EcoBike</div>
         <div class="text-1">|</div>
         <div class="text-1">Thanh toán</div>
-      </div>
-      <div class="return">
-        <img class="size-img-2" src="images/return.png" alt="return bike">
       </div>
     </div>
     <div class="content">
@@ -92,7 +91,7 @@
                 <label class="disabled" for="">Thẻ tín dụng</label>
             </div>
             <div>
-                <form action="/result" method="post">
+                <form id="form-payment" action="/result" method="post">
                     <label for="card-code">Số thẻ:</label><br>
                     <input type="text" id="card-code" name="cardCode" value="kscq1_group14_2021"><br>
                     <label for="">Tên chủ thẻ:</label><br>
@@ -101,6 +100,10 @@
                     <input type="text" name="dateExpired" value="1125"><br>
                     <label for="">Mã bảo mật:</label><br>
                     <input type="text" name="cvvCode" value="786">
+                    <% if(parkingId !== undefined || parkingId !== null) { %>
+                      <input type="hidden" name="parkingId" value=<%= parkingId %>>
+                    <% } %>
+                    <input type="hidden" name="type" value=<%= type %>>
                 </form>
             </div>
         </div>
@@ -109,7 +112,7 @@
   </div>
   <script>
     document.getElementById('payment-btn').addEventListener('click', () => {
-      document.querySelector('form').submit();
+      document.getElementById('form-payment').submit();
     })
   </script>
 </body>

@@ -70,17 +70,16 @@
   <div class="container">
     <div class="header">
       <div class="logo">
-        <img class="size-img-1" src="images/logo.png" alt="logo">
+        <form action="/home" method="get">
+          <button class="logo-btn" type="submit"><img class="size-img-1" src="images/logo.png" alt="logo"></button>
+        </form>
         <div class="name-app text-1">EcoBike</div>
         <div class="text-1">|</div>
-        <div class="text-1">Thanh toán</div>
-      </div>
-      <div class="return">
-        <img class="size-img-2" src="images/return.png" alt="return bike">
+        <div class="text-1">Kết quả</div>
       </div>
     </div>
     <div class="content">
-        <% if(response.errorCode === "00") { %>
+        <% if(response.error === false) { %>
           <div class="success">Thanh toán thành công</div>
           <div class="success"><%= response.message %></div>
         <% } else { %>

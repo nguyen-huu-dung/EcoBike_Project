@@ -12,7 +12,7 @@ class DetailsParkingController extends BaseController {
     }
 
 
-    public getParkingById(parkingId : string): Promise<Parking> {
+    public getParkingById(parkingId : string) {
         return this.parking.getParkingById(parkingId);
     }
 

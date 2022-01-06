@@ -35,12 +35,10 @@
     }
     .list-parking {
       padding: 10px;
-      background-color: rgb(241 241 241 / 57%);
-      height: calc(100vh - 150px);
+      max-height: calc(100vh - 150px);
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
-      justify-content: space-between;
     }
     .parking {
       display: flex;
@@ -50,6 +48,8 @@
       border: 1px solid gray;
       background-color: white;
       height: 29%;
+      margin: 0.5%;
+      padding: 10px;
     }
     .address-parking {
       margin-bottom: 5px;
@@ -77,43 +77,52 @@
   <div class="container">
     <div class="header">
         <div class="logo">
-            <img class="size-img-1" src="images/logo.png" alt="logo">
+          <form action="/home" method="get">
+            <button class="logo-btn" type="submit"><img class="size-img-1" src="images/logo.png" alt="logo"></button>
+          </form>
             <div class="name-app text-1">EcoBike</div>
             <div class="text-1">|</div>
-            <div class="text-1">Xe đang thuê</div>
-          </div>
-          <div class="return">
-            <img class="size-img-2" src="images/return.png" alt="return bike">
+            <div class="text-1">Trả xe</div>
           </div>
     </div>
-    <div class="list-parking">
-        <% for(let i = 1; i <= 12; i++ ){ %>
-          <div class="parking">
-            <div class="name-parking">Bãi xe Hai Bà Trưng</div>
-            <div class="address-parking">34 Trần Đại Nghĩa, Hà Nội</div>
-            <div class="details-parking">
-              <div class="avai-parking">
-                <div>
-                    <strong>Vị trí trống</strong>
+    <% if(error === true) { %> 
+      <div class="error">Không có bãi xe nào trống vị trí để trả loại xe đang thuê</div>
+    <% } else { %>
+      <div class="list-parking">
+          <% listAvalabilityParking.forEach((parking) => { %>
+            <div class="parking">
+              <div class="name-parking"><%= parking.name %></div>
+              <div class="address-parking"><%= parking.address %></div>
+              <div class="details-parking">
+                <div class="avai-parking">
+                  <div>
+                      <strong></strong>
+                  </div>
+                  <div>
+                    <strong>Xe đạp đơn:</strong>
+                    <span><%= parking.numSingle - parking.numFreeSingle %></span>
+                  </div>
+                  <div>
+                    <strong>Xe đạp đôi:</strong>
+                    <span><%= parking.numCouple - parking.numFreeCouple %></span>
+                  </div>
+                  <div>
+                    <strong>Xe đạp điện:</strong>
+                    <span><%= parking.numElectric - parking.numFreeElectric %></span>
+                  </div>
                 </div>
-                <div>
-                  <strong>Xe đạp đơn:</strong>
-                  <span>10</span>
-                </div>
-                <div>
-                  <strong>Xe đạp đôi:</strong>
-                  <span>5</span>
-                </div>
-                <div>
-                  <strong>Xe đạp điện:</strong>
-                  <span>6</span>
-                </div>
-              </div>
-              <button>Xác nhận trả xe</button>
-           </div>
-          </div>
-        <% }%>
-    </div>
+                <form action="/payment" method="post">
+                  <input type="hidden" name="parkingId" value=<%= parking.id %>>
+                  <input type="hidden" name="bikeId" value=<%= bikeId %>>
+                  <input type="hidden" name="totalRentBike" value=<%= totalRentBike %>>
+                  <input type="hidden" name="type" value="return">
+                  <button type="submit">Xác nhận trả xe</button>
+                </form>
+            </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
   </div>
 </body>
 </html>

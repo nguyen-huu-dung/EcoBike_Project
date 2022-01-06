@@ -1,3 +1,4 @@
+import { SQLException } from '../common.exception/SQLException';
 import { PaymentTransaction } from '../entity.payment/PaymentTransaction';
 import { CreditCard } from '../entity.payment/CreditCard';
 import { Invoice } from "../entity.invoice/Invoice";
@@ -16,8 +17,8 @@ class PaymentController extends BaseController {
                                             .setOwner(card.owner)
                                             .setDateExpired(card.dateExpired);
         creditCard.checkCreditCardFormat();
-        const response = await this.interbankSubsystem.pay(creditCard, invoice.getTotalPrice(), "pay rent bike");
-        if(response.errorCode === "00") {
+        const response = await this.interbankSubsystem.pay(creditCard, invoice.getTotalPrice(), "pay");
+        if(response.error === false) {
             const paymentTransaction : PaymentTransaction = new PaymentTransaction(response.transaction.command, 
                                                                                     response.transaction.transactionContent, 
                                                                                     response.transaction.createdAt,
@@ -26,13 +27,31 @@ class PaymentController extends BaseController {
             try {
                 await paymentTransaction.savePaymentTransaction();
                 invoice.setPaymentTransaction(paymentTransaction);
-                invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 1);
-                new UserService().updateUser(invoice.getBike().getId(), paymentTransaction.getTransactionId());
+                if(card.type === "rent") {
+                    await invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 1);
+                    await new UserService().updateUser(invoice.getBike().getId(), paymentTransaction.getTransactionId());
+                }
+                else if (card.type === "return") {
+                    await invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 0);
+                    await invoice.getBike().updateParkingIdById(invoice.getBike().getId(), card.parkingId);
+                    await new UserService().updateUser(0, 0);
+                }
                 await invoice.saveInvoice();
             } catch (error) {
-                console.log(error);
+                return new SQLException().getError();
             }
         }
+        return response;
+    }
+
+    public async refund(invoice : Invoice, card) {
+        const creditCard = new CreditCard().setCardCode(card.cardCode)
+                                            .setCvvCode(card.cvvCode)
+                                            .setOwner(card.owner)
+                                            .setDateExpired(card.dateExpired);
+        creditCard.checkCreditCardFormat();
+        // console.log(invoice.getBike());
+        const response = await this.interbankSubsystem.refund(creditCard, invoice.getBike().getDeposit(), "refund");
         return response;
     }
 

@@ -14,11 +14,20 @@ class PaymentScreenHandler extends BaseScreenHandler {
     }
 
     public requestToPayment() {
-        this.show(Configs.VIEW_PAYMENT_PATH, {});
+        this.show(Configs.VIEW_PAYMENT_PATH, { type: this.getReq().body.type, parkingId: null });
     }
 
     public async confirmPayment() {
-        const response = await this.getBController().payment(this.invoice, this.getReq().body);
+        let response;
+        if(this.getReq().body.type === "rent") {
+            response = await this.getBController().payment(this.invoice, this.getReq().body);
+        }
+        if(this.getReq().body.type === "return") {
+            response = await this.getBController().refund(this.invoice, this.getReq().body);
+            // console.log('refund', response);
+            response = await this.getBController().payment(this.invoice, this.getReq().body);
+            // console.log('pay', response);
+        }
         this.show(Configs.VIEW_RESULT_PATH, { response });
     }
 

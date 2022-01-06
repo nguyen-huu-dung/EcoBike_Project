@@ -1,3 +1,5 @@
+import { InvalidCardException } from "../common.exception/InvalidCardException";
+
 class  CreditCard {
     
     private cardCode : string;
@@ -11,6 +13,38 @@ class  CreditCard {
 
     public checkCreditCardFormat() {
         return true;
+    }
+
+    public checkCardCodeFormat(cardCode : string) {
+        const regex =  new RegExp('[a-zA-Z0-9_]');
+        if(!cardCode.match(regex)) {
+            return new InvalidCardException().getError();
+        }
+        return { error: false };
+    }
+
+    public checkOwnerCardFormat(owner : string) {
+        const regex =  new RegExp('[a-zA-Z0-9 ]');
+        if(!owner.match(regex)) {
+            return new InvalidCardException().getError();
+        }
+        return { error: false };
+    }
+
+    public checkCvvCodeFormat(cvvCode : string) {
+        const regex =  new RegExp('[0-9, (4)]');
+        if(!cvvCode.match(regex)) {
+            return new InvalidCardException().getError();
+        }
+        return { error: false };
+    }
+
+    public checkDateExpiredFormat(date : string) {
+        const regex =  new RegExp('[a-zA-Z0-9_]');
+        if(!date.match(regex)) {
+            return new InvalidCardException().getError();
+        }
+        return { error: false };
     }
 
     public getCardCode() : string {

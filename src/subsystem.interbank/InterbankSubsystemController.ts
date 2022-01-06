@@ -3,6 +3,14 @@ import { CreditCard } from "../entity.payment/CreditCard";
 import { InterbankBoundary } from "./InterbankBoundary";
 import { API } from "../utils/API";
 import { Utils } from "../utils/Utils";
+import { InvalidCardException } from "../common.exception/InvalidCardException";
+import { NotEnoughBalanceException } from "../common.exception/NotEnoughBalanceException";
+import { InternalServerErrorException } from "../common.exception/InternalServerErrorException";
+import { SuspiciousTransactionException } from "../common.exception/SuspiciousTransactionException";
+import { InvalidTransactionAmountException } from "../common.exception/InvalidTransactionAmountException";
+import { InvalidVersionException } from "../common.exception/InvalidVersionException";
+import { NotEnoughTransactionInfoException } from "../common.exception/NotEnoughTransactionInfoException";
+import { UnrecognizedException } from "../common.exception/UnrecognizedException";
 
 class InterbankSubsystemController {
 
@@ -25,12 +33,13 @@ class InterbankSubsystemController {
             "hashCode": API.HASH_CODE
         };
 
-        try {
-            const response = await this.interbankBoundary.query(API.PAY_URL, data);
-            return this.processResponse(response.data);
-        } catch (error) {
-            console.log(error)
-        }
+        console.log(data);
+
+        const response = await this.interbankBoundary.query(API.REFUND_URL, data);
+        return {
+            ...response.data,
+            ...this.processResponse(response.data)
+        } 
     }
     
     public async pay(card : CreditCard, amount : number, contents : string){
@@ -50,22 +59,30 @@ class InterbankSubsystemController {
             "hashCode": API.HASH_CODE
         };
 
-        try {
-            const response = await this.interbankBoundary.query(API.PAY_URL, data);
-            return this.processResponse(response.data);
-        } catch (error) {
-            console.log(error)
-        }
+        const response = await this.interbankBoundary.query(API.PAY_URL, data);
+        return {
+            ...response.data,
+            ...this.processResponse(response.data)
+        } 
     }
 
     public processResponse(response) {
-        if(response.errorCode === "00") {
-            response["message"] = "Thành công";
+        switch(response.errorCode) {
+            case "00": return {
+                message: "Thành công",
+                error: false
+                
+            }
+            case "01": return new InvalidCardException().getError();
+            case "02": return new NotEnoughBalanceException().getError();
+            case "03": return new InternalServerErrorException().getError();
+            case "04": return new SuspiciousTransactionException().getError();
+            case "05": return new NotEnoughTransactionInfoException().getError();
+            case "06": return new InvalidVersionException().getError();
+            case "07": return new InvalidTransactionAmountException().getError();
+            default : return new UnrecognizedException().getError();
         }
-        else {
-            response["message"] = "Thất bại";
-        }
-        return response;
+
     }
 }
 

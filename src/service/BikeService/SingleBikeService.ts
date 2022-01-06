@@ -2,6 +2,9 @@ import { Database } from "../db";
 import { BikeServiceInterface } from "./BikeServiceInterface";
 
 class SingleBikeService implements BikeServiceInterface {
+    updateParkingIdById(bikeId: string, parkingId: string): Promise<any> {
+        throw new Error("Method not implemented.");
+    }
 
     public getAllBike(): Promise<any> {
         return new Promise((resolve, reject) => {

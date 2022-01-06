@@ -13,7 +13,7 @@ class  Configs {
     public static VIEW_PARKING_PATH = "DetailsParkingScreen";
     public static VIEW_INVOICE_RENT_PATH = "InvoiceRentScreen";
     public static VIEW_PAYMENT_PATH = "PaymentScreen";
-    public static VIEW_INVOICE_RETURN_PATH = "InvoiceReturnScreen";
+    public static VIEW_RENT_BIKE_PATH = "RentBikeScreen";
     public static VIEW_RETURN_PATH = "ReturnBikeScreen";
     public static VIEW_RESULT_PATH = "ResultScreen";
 }

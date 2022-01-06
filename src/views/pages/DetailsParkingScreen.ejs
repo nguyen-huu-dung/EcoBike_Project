@@ -102,6 +102,13 @@
       height: 45px;
       padding: 5px;
     }
+    .error {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 30px;
+      color: red;
+      font-weight: 750;
+    }
   </style>
 </head>
 <body>
@@ -119,48 +126,53 @@
         <img class="size-img-2" src="images/return.png" alt="return bike">
       </div> -->
     </div>
-    <div class="content">
-      <div class="info-parking">
-        <h3>Thông tin bãi xe</h3>
-        <div class="details-info">
-          <div><strong class="width-100">Tên bãi xe:</strong><span><%= parkingInfo.name %></span></div>
-          <div><strong class="width-100">Địa chị:</strong><span><%= parkingInfo.address %></span></div>
-          <div><strong class="width-100">Diện tích:</strong><span><%= parkingInfo.area %> m2</span></div>
-          <div><strong class="width-100">Sức chứa:</strong></div>
-          <div>
-            <div><span class="width-100">Xe đạp đơn:</span> <span><%= parkingInfo.numSingle %></span></div>
-            <div><span class="width-100">Xe đạp đôi:</span> <span><%= parkingInfo.numCouple %></span></div>
-            <div><span class="width-100">Xe đạp điện:</span> <span><%= parkingInfo.numElectric %></span></div>
-          </div>
-          <div><strong>Xe khả dụng:</strong></div>
-          <div>
-            <div><span class="width-100">Xe đạp đơn:</span><span><%= parkingInfo.numFreeSingle %></span></div>
-            <div><span class="width-100">Xe đạp đôi:</span><span><%= parkingInfo.numFreeCouple %></span></div>
-            <div><span class="width-100">Xe đạp điện:</span><span><%= parkingInfo.numFreeElectric %></span></div>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <div class="list-bike">
-          <% parkingInfo.availabilityBikes.forEach((bike) => { %>
-            <div class="bike">
-              <h4><%= bike.category %></h4>
-              <div class="info-bike">
-                <div>
-                  <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
-                  <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
-                </div>
-                <form action="/confirm-rent-bike" method="post">
-                  <input type="hidden" name="bikeId" value=<%= bike.id %>>
-                  <input type="hidden" name="category" value="<%= bike.category %>">
-                  <button type="submit">Thuê xe</button>
-                </form>
-              </div>
+    <% if(data.error === true) { %> 
+      <div class="error"><%= data.message %></div>
+    <% } else { %>
+      <div class="content">
+        <div class="info-parking">
+          <h3>Thông tin bãi xe</h3>
+          <div class="details-info">
+            <div><strong class="width-100">Tên bãi xe:</strong><span><%= data.parkingInfo.name %></span></div>
+            <div><strong class="width-100">Địa chị:</strong><span><%= data.parkingInfo.address %></span></div>
+            <div><strong class="width-100">Diện tích:</strong><span><%= data.parkingInfo.area %> m2</span></div>
+            <div><strong class="width-100">Sức chứa:</strong></div>
+            <div>
+              <div><span class="width-100">Xe đạp đơn:</span> <span><%= data.parkingInfo.numSingle %></span></div>
+              <div><span class="width-100">Xe đạp đôi:</span> <span><%= data.parkingInfo.numCouple %></span></div>
+              <div><span class="width-100">Xe đạp điện:</span> <span><%= data.parkingInfo.numElectric %></span></div>
             </div>
-          <% }) %>
+            <div><strong>Xe khả dụng:</strong></div>
+            <div>
+              <div><span class="width-100">Xe đạp đơn:</span><span><%= data.parkingInfo.numFreeSingle %></span></div>
+              <div><span class="width-100">Xe đạp đôi:</span><span><%= data.parkingInfo.numFreeCouple %></span></div>
+              <div><span class="width-100">Xe đạp điện:</span><span><%= data.parkingInfo.numFreeElectric %></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="list">
+          <div class="list-bike">
+            <% data.parkingInfo.availabilityBikes.forEach((bike) => { %>
+              <div class="bike">
+                <h4><%= bike.category %></h4>
+                <div class="info-bike">
+                  <div>
+                    <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
+                    <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
+                  </div>
+                  <form action="/confirm-rent-bike" method="post">
+                    <input type="hidden" name="userId" value="1">
+                    <input type="hidden" name="bikeId" value=<%= bike.id %>>
+                    <input type="hidden" name="category" value="<%= bike.category %>">
+                    <button type="submit">Thuê xe</button>
+                  </form>
+                </div>
+              </div>
+            <% }) %>
+          </div>
         </div>
       </div>
-    </div>
+    <% } %>
   </div>
 </body>
 </html>

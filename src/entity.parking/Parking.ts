@@ -24,7 +24,7 @@ class Parking {
 
     }
 
-    public async getAllParking() : Promise<Parking[]> {
+    public async getAllParking() {
         try {
             let list : Array<any> = await this.parkingServiceInterface.getAllParking();
             let listParking : Array<Parking> = await Promise.all(list.map(async (parking, index) => {
@@ -40,13 +40,13 @@ class Parking {
                                         .setNumFreeElectric(numFreeElectric);
                 return newParking;
             }))
-            return listParking;
+            return { listParking, error: false };
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 
-    public async searchParking(key: string): Promise<Parking[]> {
+    public async searchParking(key: string) {
         try {
             let list : Array<any> = await this.parkingServiceInterface.getAllParking();
             const keyFormat : string = Utils.cleanAccents(key);
@@ -68,13 +68,13 @@ class Parking {
                                         .setNumFreeElectric(numFreeElectric);
                 return newParking;
             }))
-            return searchParking;
+            return { listParking : searchParking, error: false };
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 
-    public async getParkingById(parkingId: string): Promise<Parking> {
+    public async getParkingById(parkingId: string) {
         try {
             const parking = await this.parkingServiceInterface.getParkingById(parkingId);
             const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
@@ -93,18 +93,49 @@ class Parking {
                                     .setNumFreeElectric(numFreeElectric);
             const availabilityBikes = (await new Bike().setBikeServiceInterface(new BikeService()).getAllBike()).filter((bike : Bike) => bike.getIsRented() === 0 && bike.getParkingId() == parkingId);
             newParking.setAvailabilityBikes(availabilityBikes);
-            return newParking;
+            return { parkingInfo : newParking, error: false } ;
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 
-    public async getAllAvailabilityParking() {
-        try {
-            const listAllParking = await this.getAllParking();
-        } catch (error) {
-            
+    public async getAllAvailabilityParking(category : string) {
+        const list = await this.parkingServiceInterface.getAllParking();
+        let listParking : Array<Parking> = await Promise.all(list.map(async (parking, index) => {
+            const numFreeSingle : number = await this.parkingServiceInterface.getNumFreeSingleBikeByParkingId(parking.id);
+            const numFreeCouple : number = await this.parkingServiceInterface.getNumFreeCoupleBikeByParkingId(parking.id);
+            const numFreeElectric :number = await this.parkingServiceInterface.getNumFreeElectricBikeByParkingId(parking.id);
+            const newParking : Parking = new Parking()
+                                                .setId(parking.id)
+                                                .setName(parking.name)
+                                                .setAddress(parking.address)
+                                                .setNumSingle(parking.numSingle)
+                                                .setNumCouple(parking.numCouple)
+                                                .setNumElectric(parking.numElectric)
+                                                .setNumFreeSingle(numFreeSingle)
+                                                .setNumFreeCouple(numFreeCouple)
+                                                .setNumFreeElectric(numFreeElectric);
+                return newParking;
+            }))
+        let listAvalabilityParking = [];
+        switch(category) {
+            case "Xe đạp đơn": {
+                listAvalabilityParking = listParking.filter((parking) => parking.getNumSingle() - parking.getNumFreeSingle() > 0);
+                break;
+            }
+            case "Xe đạp đôi": {
+                listAvalabilityParking = listParking.filter((parking) => parking.getNumCouple() - parking.getNumFreeCouple() > 0);
+                break;
+            }
+            case "Xe đạp điện": {
+                listAvalabilityParking = listParking.filter((parking) => {
+                    return parking.getNumElectric() - parking.getNumFreeElectric() > 0;
+                });
+                break;
+            }
+            default: break
         }
+        return { listAvalabilityParking, error: false }; 
     }
 
     public setParkingService(parkingServiceInterface : ParkingServiceInterface) : Parking {

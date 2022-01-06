@@ -1,8 +1,12 @@
+import { Utils } from '../utils/Utils';
+import { SQLException } from '../common.exception/SQLException';
 import { BikeServiceInterface } from '../service/BikeService/BikeServiceInterface';
+import { CalculateRentBikeInterface } from "../interface.calculate/CalculateRentBikeInterface";
 
 class Bike {
 
     protected bikeServiceInterface : BikeServiceInterface;
+    protected calculateRentBikeInterface : CalculateRentBikeInterface;
 
     protected id: string;
     protected category: string;
@@ -18,7 +22,7 @@ class Bike {
 
     }
 
-    public async getAllBike(): Promise<Bike[]> {
+    public async getAllBike() {
         try {
             let list = await this.bikeServiceInterface.getAllBike();
             list = list.map((bike) => {
@@ -33,11 +37,11 @@ class Bike {
             })
             return list;
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 
-    public async getBikeById(bikeId: string): Promise<any> {
+    public async getBikeById(bikeId: string) {
         try {
             const bike = await this.bikeServiceInterface.getBikeById(bikeId);
             const newBike : Bike = new Bike()
@@ -53,7 +57,7 @@ class Bike {
                                         .setBikeServiceInterface(this.bikeServiceInterface);
             return newBike;
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 
@@ -62,8 +66,26 @@ class Bike {
             const updateBike = await this.bikeServiceInterface.updateIsRentedBikeById(bikeId, value);
             return updateBike;
         } catch (error) {
-            
+            return new SQLException().getError();
         }
+    } 
+
+    public async updateParkingIdById(bikeId : string, parkingId : string) {
+        try {
+            const updateBike = await this.bikeServiceInterface.updateParkingIdById(bikeId, parkingId);
+            return updateBike;
+        } catch (error) {
+            return new SQLException().getError();
+        }
+    }
+
+    public calculateRentBike(beginTime : string, rentalPrice) {
+        return this.calculateRentBikeInterface.calculateRentBike(beginTime, rentalPrice);
+    }
+
+    public setCalculateRentBikeInterface(calculateRentBikeInterface : CalculateRentBikeInterface) : Bike {
+        this.calculateRentBikeInterface = calculateRentBikeInterface;
+        return this;
     } 
 
     public setBikeServiceInterface(bikeServiceInterface : BikeServiceInterface) : Bike {

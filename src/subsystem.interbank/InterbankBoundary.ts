@@ -1,3 +1,4 @@
+import { response } from "express";
 import { API } from "../utils/API";
 
 class InterbankBoundary {
@@ -7,7 +8,7 @@ class InterbankBoundary {
             const response = await API.patch(url, data);
             return response;
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

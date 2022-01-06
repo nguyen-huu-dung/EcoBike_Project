@@ -13,22 +13,16 @@ class InvoiceRentScreenHandler extends BaseScreenHandler {
     }
 
     public async rentBike() : Promise<any> {
-        try {
-            this.getBController().setBike(this.getReq().body.category);
-            const invoice = await this.getBController().rentBike(this.getReq().body.bikeId);
-            this.setInvoice(invoice);
-            super.show(Configs.VIEW_INVOICE_RENT_PATH, { invoice });
-        } catch (error) {
-            console.log(error);   
+        this.getBController().setBike(this.getReq().body.category);
+        const data = await this.getBController().rentBike(this.getReq().body.bikeId, this.getReq().body.userId);
+        if(!data.error) {
+            this.setInvoice(data.invoice);
         }
+        super.show(Configs.VIEW_INVOICE_RENT_PATH, { data });
     }
 
     public async invoiceRent() {
-        try {
-            this.getBController().invoiceRent(this.invoice);
-        } catch (error) {
-            console.log(error);
-        }
+        this.getBController().invoiceRent(this.invoice);
     }
 
     public setInvoice(invoice : Invoice) {

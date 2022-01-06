@@ -1,6 +1,10 @@
 interface UserServiceInterface {
 
-    updateUser(bikeId, transactionId);
+    checkUserRented(userId: string);
+
+    updateUser(bikeId : string, transactionId : string);
+
+    getRentBikeByUserId(userId : string);
 
 }
 

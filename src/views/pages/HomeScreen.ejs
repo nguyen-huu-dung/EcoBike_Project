@@ -82,6 +82,13 @@
       border: none;
       background-color: inherit;
     }
+    .error {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 30px;
+      color: red;
+      font-weight: 750;
+    }
   </style>
 </head>
 <body>
@@ -93,21 +100,24 @@
       </div>
       <div>
         <form action='/home' method="post">
-          <input type="text" id="search" name="search" placeholder="Tìm kiếm bãi xe">
+          <input type="text" id="search" name="search" placeholder="Tìm kiếm bãi xe" autocomplete="off">
           <button type="submit" id="search-btn">Tìm kiếm bãi xe</button>
         </form>
       </div>
-      <div class="return-bike">
-        <form action="/rent-bike" method="get">
+      <div class="rent-bike">
+        <form action="/rent-bike" method="post">
+          <input type="hidden"  name="userId" value="1"> 
           <button class="rent-bike-btn" type="submit"><img class="size-img-1" src="images/rent-bike.png" alt="return bike"></button>
         </form>
       </div>
     </div>
-    <% if(listParking === undefined || listParking.length === 0) { %>
+    <% if(data.error === true) { %> 
+      <div class="error"><%= data.message %></div>
+    <% } else if(data.listParking === undefined || data.listParking.length === 0) { %>
       <div class="no-parking">Không có bãi xe nào</div>
     <% } else { %>
       <div class="list-parking">
-        <% listParking.forEach((parking) => { %>
+        <% data.listParking.forEach((parking) => { %>
           <div class="parking" id=<%= parking.id %>>
             <div class="name-parking"><%=  parking.name %></div>
             <div class="address-parking"><%= parking.address %></div>

@@ -1,8 +1,8 @@
 import { RuntimeException } from "./RuntimeException";
 
 class SQLException extends RuntimeException {
-    constructor(message) {
-        super(message);
+    constructor() {
+        super("Xảy ra lỗi khi kết nối tới database");
     }
 }
 

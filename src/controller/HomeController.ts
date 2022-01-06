@@ -11,11 +11,11 @@ class HomeController extends BaseController {
         this.parking = new Parking().setParkingService(new ParkingService());
     }
 
-    public getAllParking() : Promise<Parking[]> {
+    public getAllParking() {
         return this.parking.getAllParking();
     }
 
-    public searchParking(key: string): Promise<Parking[]> {
+    public searchParking(key: string) {
         return this.parking.searchParking(key);
     }
 }

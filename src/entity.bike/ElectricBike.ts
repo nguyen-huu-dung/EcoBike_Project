@@ -1,6 +1,5 @@
+import { SQLException } from "../common.exception/SQLException";
 import { Bike } from "./Bike";
-import * as Bikes from "../../assets/db/bike.json";
-import * as Electrics from '../../assets/db/electricBike.json';
 
 class ElectricBike extends Bike {
 
@@ -27,7 +26,7 @@ class ElectricBike extends Bike {
                                         .setBikeServiceInterface(this.bikeServiceInterface);
             return newBike;
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 

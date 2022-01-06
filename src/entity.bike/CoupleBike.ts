@@ -1,5 +1,5 @@
+import { SQLException } from "../common.exception/SQLException";
 import { Bike } from "./Bike";
-import * as data from '../../assets/db/bike.json';
 
 class CoupleBike extends Bike {
 
@@ -23,7 +23,7 @@ class CoupleBike extends Bike {
                                         .setBikeServiceInterface(this.bikeServiceInterface);
             return newBike;
         } catch (error) {
-            console.log(error);
+            return new SQLException().getError();
         }
     }
 
@@ -32,7 +32,7 @@ class CoupleBike extends Bike {
             const updateBike = await this.bikeServiceInterface.updateIsRentedBikeById(bikeId, value);
             return updateBike;
         } catch (error) {
-            
+            return new SQLException().getError();
         }
     } 
 }

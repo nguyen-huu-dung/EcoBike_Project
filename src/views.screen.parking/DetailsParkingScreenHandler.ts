@@ -11,8 +11,8 @@ class DetailsParkingScreenHandler extends BaseScreenHandler {
     }
 
     public async getParkingById(): Promise<void> {
-        let parkingInfo : Parking = await this.getBController().getParkingById(this.getReq().body.parkingId);
-        this.show(Configs.VIEW_PARKING_PATH, { parkingInfo });
+        let data = await this.getBController().getParkingById(this.getReq().body.parkingId);
+        this.show(Configs.VIEW_PARKING_PATH, { data });
     }
 
     public getBController(): DetailsParkingController {
