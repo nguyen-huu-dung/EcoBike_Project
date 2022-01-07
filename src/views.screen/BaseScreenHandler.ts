@@ -1,5 +1,8 @@
 import { BaseController } from "../controller/BaseController";
 
+/**
+ * class định nghĩa các attribute và phương thức chung của các màn hình
+ */
 class BaseScreenHandler {
     
     protected req;
@@ -10,11 +13,17 @@ class BaseScreenHandler {
     constructor() {
     }
 
+    /**
+     * phương thức hiển thị ra màn hình 
+     * @param viewPath đường dẫn đến màn hình tương ứng
+     * @param content nội dung của màn hình
+     */
     public show(viewPath : string, content : any) : void {
         this.setContent(content);
         this.res.render(viewPath , this.content);
     }
 
+    // getter và setter
     public getReq() {
         return this.req;
     }

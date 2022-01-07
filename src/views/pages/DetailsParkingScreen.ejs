@@ -160,7 +160,7 @@
                     <div><strong class="width-100">Mã vạch:</strong><span><%= bike.barcode %></span></div>
                     <div><strong class="width-100">Biển số:</strong><span><%= bike.licensePlate %></span></div>
                   </div>
-                  <form action="/confirm-rent-bike" method="post">
+                  <form action="/details-bike-bike" method="post">
                     <input type="hidden" name="userId" value="1">
                     <input type="hidden" name="bikeId" value=<%= bike.id %>>
                     <input type="hidden" name="category" value="<%= bike.category %>">
