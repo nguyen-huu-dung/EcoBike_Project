@@ -14,7 +14,7 @@ class PaymentScreenHandler extends BaseScreenHandler {
     }
 
     public requestToPayment() {
-        this.show(Configs.VIEW_PAYMENT_PATH, { type: this.getReq().body.type, parkingId: null });
+        this.show(Configs.VIEW_PAYMENT_PATH, { type: this.getReq().body.type, parkingId: this.getReq().body.parkingId });
     }
 
     public async confirmPayment() {

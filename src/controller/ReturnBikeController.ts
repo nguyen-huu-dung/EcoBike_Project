@@ -1,3 +1,4 @@
+import { paymentScreenHandler } from '../routers';
 import { BikeService } from '../service/BikeService/BikeService';
 import { ParkingService } from "../service/ParkingService/ParkingService";
 import { Parking } from "../entity.parking/Parking";
@@ -25,7 +26,7 @@ class ReturnBikeController extends BaseController {
         const bike = await this.bike.getBikeById(bikeId);
         // console.log(bike);
         const invoice = Invoice.createInvoice(bike, totalRentBike, new InvoiceService());
-        return { invoice, error : false };
+        paymentScreenHandler.setInvoice(invoice).requestToPayment();
     }
 }
 
