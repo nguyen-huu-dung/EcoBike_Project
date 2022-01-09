@@ -1,3 +1,7 @@
+/**
+ * @author Nguyen Huu Dung
+ */
+
 import app from './app';
 
 const PORT = 8080;

@@ -1,3 +1,7 @@
+/**
+ * @author Nguyen Huu Dung
+ */
+
 import { Configs } from "../utils/Configs";
 import { Invoice } from "../entity.invoice/Invoice";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";
@@ -48,7 +52,8 @@ class PaymentScreenHandler extends BaseScreenHandler {
         }
         this.show(Configs.VIEW_RESULT_PATH, { response });
     }
-
+    
+    // Getter vs setter
     public setInvoice(invoice : Invoice) : PaymentScreenHandler {
         this.invoice = invoice;
         return this;

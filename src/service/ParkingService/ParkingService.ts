@@ -1,8 +1,14 @@
+/**
+ * @author Do Minh Hoang,Nguyen Cong Vinh
+ */
 import { Database } from '../db';
 import { ParkingServiceInterface } from "./ParkingServiceInterface";
 
 class ParkingService implements ParkingServiceInterface {
     
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getAllParking() : Promise<any> {
         return new Promise ((resolve, reject) => {
 
@@ -15,6 +21,9 @@ class ParkingService implements ParkingServiceInterface {
         })
     }
     
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getNumFreeSingleBikeByParkingId(id: string) : Promise<any> {
         return new Promise ((resolve, reject) => {
 
@@ -27,6 +36,9 @@ class ParkingService implements ParkingServiceInterface {
         })
     }
 
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getNumFreeCoupleBikeByParkingId(id: string) : Promise<any> {
         return new Promise ((resolve, reject) => {
 
@@ -39,6 +51,9 @@ class ParkingService implements ParkingServiceInterface {
         })
     }
 
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getNumFreeElectricBikeByParkingId(id: string) : Promise<any> {
         return new Promise ((resolve, reject) => {
 
@@ -51,6 +66,9 @@ class ParkingService implements ParkingServiceInterface {
         })
     }
 
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getParkingById(parkingId : string): Promise<any> {
         return new Promise ((resolve, reject) => {
 

@@ -22,6 +22,10 @@ class Utils {
         return str;
     }
 
+    /**
+     * Phương thức lấy thời gian hiện tại
+     * @returns String
+     */
     public static getTimeNow() : string {
         const time = new Date();
         const timeStr : string =
@@ -34,6 +38,11 @@ class Utils {
         return timeStr;
     }
 
+    /**
+     * Phương thức chuyển đổi kiểu dữ liệu String sang Date
+     * @param time 
+     * @returns 
+     */
     public static changeStringToDate(time: string) {
         const str = time.split(" ");
         const str1 = str[0].split('-');

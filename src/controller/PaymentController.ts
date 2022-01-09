@@ -1,3 +1,6 @@
+/**
+ * @author Nguyen Huu Dung, Dang Tung Lam
+ */
 import { SQLException } from '../common.exception/SQLException';
 import { PaymentTransaction } from '../entity.payment/PaymentTransaction';
 import { CreditCard } from '../entity.payment/CreditCard';
@@ -11,6 +14,14 @@ class PaymentController extends BaseController {
 
     private interbankSubsystem : InterbankSubsystem;
 
+
+
+    /**
+     * Phương thức thực hiện thanh toán
+     * @param invoice : Hóa đơn
+     * @param card : Object chứa thông tin nội dung của trang PaymentScreen
+     * @returns : Object chứa thông tin trả về sau khi thanh toán
+     */
     public async payment(invoice : Invoice, card) {
         const creditCard = new CreditCard().setCardCode(card.cardCode)
                                             .setCvvCode(card.cvvCode)
@@ -61,6 +72,12 @@ class PaymentController extends BaseController {
         return response;
     }
 
+    /**
+     * Phương thức thực hiện hoàn trả
+     * @param invoice : Hóa đơn
+     * @param card : Object chứa thông tin nội dung của trang PaymentScreen
+     * @returns : Object chứa thông tin trả về sau khi thanh toán
+     */
     public async refund(invoice : Invoice, card) {
         const creditCard = new CreditCard().setCardCode(card.cardCode)
                                             .setCvvCode(card.cvvCode)

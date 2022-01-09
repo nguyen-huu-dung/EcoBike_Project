@@ -1,8 +1,17 @@
+/**
+ * @author Dang Tung Lam
+ */
 import { Utils } from "../utils/Utils";
 import { CalculateRentBikeInterface } from "./CalculateRentBikeInterface";
 
 class NormalCalculate implements CalculateRentBikeInterface {
     
+    /**
+     * Phương thức tính toán số tiền thuê
+     * @param beginTime : thời gian bắt đầu thuê
+     * @param rentalPrice : giá thuê
+     * @returns Object
+     */
     calculateRentBike(beginTime: string, rentalPrice: any) {
         const currentTime = Date.now();
         const beginRentBikeTime = Utils.changeStringToDate(beginTime).getTime();

@@ -1,3 +1,6 @@
+/**
+ * @author Dang Tung Lam, Nguyen Huu Dung
+ */
 import { Utils } from '../utils/Utils';
 import { SQLException } from '../common.exception/SQLException';
 import { BikeServiceInterface } from '../service/BikeService/BikeServiceInterface';
@@ -18,10 +21,18 @@ class Bike {
     protected parkingName: string;
     protected parkingId: string;
 
+    /**
+     * Phương thức khởi tạo
+     */
     constructor() {
 
     }
+    
 
+    /**
+     * Phương thức lấy thông tin tất cả xe
+     * @returns : Bike[] Or Error
+     */
     public async getAllBike() {
         try {
             let list = await this.bikeServiceInterface.getAllBike();
@@ -41,6 +52,11 @@ class Bike {
         }
     }
 
+    /**
+     * Phương thức lấy thông tin của xe theo Id
+     * @param bikeId : Id của xe cần lấy thông tin
+     * @returns : Bike Or Error
+     */
     public async getBikeById(bikeId: string) {
         try {
             const bike = await this.bikeServiceInterface.getBikeById(bikeId);
@@ -61,6 +77,12 @@ class Bike {
         }
     }
 
+    /**
+     * Phương thức cập nhật trạng thái của xe theo Id
+     * @param bikeId : Id của xe
+     * @param value : Giá trị biểu thị trạng thái của xe[0: Chưa được thuê - 1: Đã được thuê]
+     * @returns Object Or Error
+     */
     public async updateIsRentedBikeById(bikeId : string, value : number) {
         try {
             const updateBike = await this.bikeServiceInterface.updateIsRentedBikeById(bikeId, value);
@@ -70,6 +92,12 @@ class Bike {
         }
     } 
 
+    /**
+     * Phương thức cập nhật id của bãi xe theo id của xe
+     * @param bikeId : Id của xe 
+     * @param parkingId : Id của bãi xe
+     * @returns Object Or Error
+     */
     public async updateParkingIdByBikeId(bikeId : string, parkingId : string) {
         try {
             const updateBike = await this.bikeServiceInterface.updateParkingIdByBikeId(bikeId, parkingId);
@@ -79,10 +107,17 @@ class Bike {
         }
     }
 
+    /**
+     * Phương thức tính số tiền thuê xe
+     * @param beginTime : Thời gian bắt đầu
+     * @param rentalPrice : Giá thuê xe 
+     * @returns 
+     */
     public calculateRentBike(beginTime : string, rentalPrice) {
         return this.calculateRentBikeInterface.calculateRentBike(beginTime, rentalPrice);
     }
 
+   /// Getter vs Setter
     public setCalculateRentBikeInterface(calculateRentBikeInterface : CalculateRentBikeInterface) : Bike {
         this.calculateRentBikeInterface = calculateRentBikeInterface;
         return this;

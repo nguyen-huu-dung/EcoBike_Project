@@ -1,3 +1,7 @@
+
+/**
+ * @author Nguyen Huu Dung, Dang Tung Lam
+ */
 import { InvalidCardException } from "../common.exception/InvalidCardException";
 
 class  CreditCard {
@@ -7,10 +11,17 @@ class  CreditCard {
     private cvvCode : string;
     private dateExpired: string;
 
+    /**
+     * Phương thức khởi tạo 
+     */
     constructor() {
 
     }
 
+    /**
+     * Phương thức kiểm tra định dạng thông tin của thẻ tín dụng
+     * @returns Boolean
+     */
     public checkCreditCardFormat() {
         let check;
         check = this.checkCardCodeFormat(this.cardCode);
@@ -23,13 +34,22 @@ class  CreditCard {
         return check;
     }
 
+    /**
+     * Phương thức kiểm tra định mã thẻ
+     * @param cardCode : Mã thẻ
+     * @returns Error
+     */
     public checkCardCodeFormat(cardCode : string) {
         if(cardCode === null || cardCode === undefined) {
             return new InvalidCardException().getError();
         }
         return { error: false };
     }
-
+    /**
+     * Phương thức kiểm tra chủ thẻ
+     * @param owner : Chủ thẻ
+     * @returns Error
+     */
     public checkOwnerCardFormat(owner : string) {
         if(owner === null || owner === undefined) {
             return new InvalidCardException().getError();
@@ -37,13 +57,23 @@ class  CreditCard {
         return { error: false };
     }
 
+    /**
+     * Phương thức kiểm tra định dạng mã bí mật
+     * @param cvvCode : Mã bí mật
+     * @returns Error
+     */
     public checkCvvCodeFormat(cvvCode : string) {
         if(cvvCode === null || cvvCode === undefined) {
             return new InvalidCardException().getError();
         }
         return { error: false };
     }
-
+    
+    /**
+     * Phương thức kiểm tra định dạng ngày hết hạn
+     * @param date : Ngày hết hạn
+     * @returns Error
+     */
     public checkDateExpiredFormat(date : string) {
         if(date === null || date === undefined) {
             return new InvalidCardException().getError();
