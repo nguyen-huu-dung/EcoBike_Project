@@ -1,3 +1,6 @@
+/**
+ * @author Do Minh Hoang
+ */
 import { HomeController } from "../controller/HomeController";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";
 import { Configs } from "../utils/Configs";

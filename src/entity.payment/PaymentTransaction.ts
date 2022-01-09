@@ -1,3 +1,6 @@
+/**
+ * @author Nguyen Huu Dung, Dang Tung Lam
+ */
 import { PaymentServiceInterface } from "../service/PaymentService/PaymentServiceInterface";
 import { CreditCard } from "./CreditCard";
 
@@ -10,17 +13,28 @@ class PaymentTransaction {
     private transactionId : string;
     private paymentServiceInterface : PaymentServiceInterface;
 
+    /**
+     * Phương thức khởi tạo
+     * @param command : Loại giao dịch
+     * @param transactionContent : Nội dung giao dịch
+     * @param createdAt : Thời gian khởi tạo
+     * @param transactionId : Id giao dịch
+     */
     constructor(command, transactionContent, createdAt, transactionId) {
         this.command = command;
         this.transactionContent = transactionContent;
         this.createdAt = createdAt;
         this.transactionId = transactionId;
     }
-
+    /**
+     * Phương thức lưu giao dịch
+     * @returns 
+     */
     public savePaymentTransaction() : void {
         return this.paymentServiceInterface.savePaymentTransaction(this);
     }
 
+    // Getter vs setter
     public setPaymentServiceInterface(paymentServiceInterface : PaymentServiceInterface) : PaymentTransaction {
         this.paymentServiceInterface = paymentServiceInterface;
         return this;

@@ -1,9 +1,14 @@
+/**
+ * @author Nguyen Cong Vinh,Dang Tung Lam,Nguyen Huu Dung
+ */
 import { Database } from "../db";
 import { BikeServiceInterface } from "./BikeServiceInterface";
 
 class BikeService implements BikeServiceInterface {
 
-
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getAllBike(): Promise<any> {
         return new Promise((resolve, reject) => {
 
@@ -16,7 +21,9 @@ class BikeService implements BikeServiceInterface {
         })
     }
 
-
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getBikeById(bikeId : string): Promise<any> {
         return new Promise((resolve, reject) => {
 
@@ -29,6 +36,9 @@ class BikeService implements BikeServiceInterface {
         })
     }
 
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public updateIsRentedBikeById(bikeId: string, value: number): Promise<any> {
         return new Promise((resolve, reject) => {
 
@@ -39,7 +49,10 @@ class BikeService implements BikeServiceInterface {
             })
         })
     }
-
+    
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     updateParkingIdByBikeId(bikeId: string, parkingId: string): Promise<any> {
         return new Promise((resolve, reject) => {
 

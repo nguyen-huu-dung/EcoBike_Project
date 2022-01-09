@@ -1,10 +1,16 @@
+/**
+ * @author Do Minh Hoang
+ */
 import * as mysql from 'mysql';
 import { Configs } from '../utils/Configs';
 
 class Database {
 
     private static conn;
-    
+    /**
+     * Phương thức dùng để kết nối database
+     * @returns Connection
+     */
     public static getConnectDb() : any {
         if(this.conn === null || this.conn === undefined) {
             this.conn = mysql.createConnection({

@@ -1,3 +1,6 @@
+/**
+ * @author Do Minh Hoang
+ */
 import { RentedBikeBeforeException } from "../common.exception/RentedBikeBeforeException";
 import { SQLException } from "../common.exception/SQLException";
 import { UserServiceInterface } from "../service/UserService/UserServiceInterface";
@@ -5,11 +8,18 @@ import { UserServiceInterface } from "../service/UserService/UserServiceInterfac
 class User {
 
     private userServiceInterface : UserServiceInterface;
-
+    /**
+     * Phương thức khởi tạo
+     */
     constructor() {
         
     }
 
+    /**
+     * Phương thức lấy thông tin xe đang thuê của user
+     * @param userId : Id của user
+     * @returns Bike Or Error
+     */
     public async getRentBikeByUserId(userId : string) {
         try {
             const response = await this.userServiceInterface.getRentBikeByUserId(userId);
@@ -19,6 +29,12 @@ class User {
         }
     }
 
+
+    /**
+     * Phương thức kiểm tra user đã thuê xe hay chưa
+     * @param userId : Id của user
+     * @returns : Boolean Or Error
+     */
     public async checkRentedBike(userId : string) {
         try {
             const user = await this.userServiceInterface.checkUserRented(userId);
@@ -31,7 +47,7 @@ class User {
             return new SQLException().getError();
         }
     }
-
+    // Getter vs Setter
     public setUserServiceInterface(userServiceInterface : UserServiceInterface) : User {
         this.userServiceInterface = userServiceInterface;
         return this;

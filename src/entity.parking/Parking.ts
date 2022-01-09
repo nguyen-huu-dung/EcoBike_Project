@@ -1,3 +1,6 @@
+/**
+ * @author Nguyen Cong Vinh, Do Minh Hoang
+ */
 import { Utils } from '../utils/Utils';
 import { Bike } from '../entity.bike/Bike';
 import { ParkingServiceInterface } from '../service/ParkingService/ParkingServiceInterface';
@@ -20,10 +23,18 @@ class Parking {
     private numFreeElectric: number;
     private availabilityBikes: Array<any>;
 
+    /**
+     * Phương thức khởi tạo
+     */
     constructor() {
 
     }
 
+    
+    /**
+     * Phương thức lấy tất cả thông tin của bãi xe
+     * @returns Parking[] Or Error
+     */
     public async getAllParking() {
         try {
             let list : Array<any> = await this.parkingServiceInterface.getAllParking();
@@ -45,7 +56,11 @@ class Parking {
             return new SQLException().getError();
         }
     }
-
+    /**
+     * Phương thức lấy tất cả thông tin của bãi xe theo điều kiện tìm kiếm
+     * @param key : Khóa tìm kiễm
+     * @returns Parking[] Or Error
+     */
     public async searchParking(key: string) {
         try {
             let list : Array<any> = await this.parkingServiceInterface.getAllParking();
@@ -74,6 +89,11 @@ class Parking {
         }
     }
 
+    /**
+     * Phương thức lấy thông tin của bãi xe theo parkingId
+     * @param parkingId : Id của bãi xe
+     * @returns Parking Or Error
+     */
     public async getParkingById(parkingId: string) {
         try {
             const parking = await this.parkingServiceInterface.getParkingById(parkingId);
@@ -99,6 +119,11 @@ class Parking {
         }
     }
 
+    /**
+     * Phương thức lấy thông tin của bãi xe khả dụng
+     * @param category : Loại xe
+     * @returns : Parking[] Or Error
+     */
     public async getAllAvailabilityParking(category : string) {
         const list = await this.parkingServiceInterface.getAllParking();
         let listParking : Array<Parking> = await Promise.all(list.map(async (parking, index) => {
@@ -138,6 +163,7 @@ class Parking {
         return { listAvalabilityParking, error: false }; 
     }
 
+    // Getter vs setter
     public setParkingService(parkingServiceInterface : ParkingServiceInterface) : Parking {
         this.parkingServiceInterface = parkingServiceInterface;
         return this;

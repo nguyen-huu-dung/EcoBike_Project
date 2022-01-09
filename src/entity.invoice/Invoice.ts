@@ -1,3 +1,6 @@
+/**
+ * @author Dang Tung Lam, Nguyen Huu Dung
+ */
 import { Bike } from "../entity.bike/Bike";
 import { PaymentTransaction } from "../entity.payment/PaymentTransaction";
 import { InvoiceServiceInterface } from "../service/InvoiceService/InvoiceServiceInterface";
@@ -12,10 +15,20 @@ class Invoice {
     private createdAt : string;
     private paymentTransaction : PaymentTransaction;
 
+    /**
+     * Phương thức khởi tạo
+     */
     constructor() {
 
     }
-
+    
+    /**
+     * Phương thức khởi tạo 1 hóa đơn
+     * @param bike : Thông tin của xe
+     * @param totalPrice : Tổng tiền
+     * @param invoiceServiceInterface: Interface chứa các phương thức giao tiếp với database 
+     * @returns 
+     */
     public static createInvoice(bike, totalPrice, invoiceServiceInterface) {
         return new Invoice().setBike(bike)
                             .setTotalPrice(totalPrice)
@@ -23,6 +36,9 @@ class Invoice {
                             .setInvoiceServiceInterface(invoiceServiceInterface);
     }
 
+    /**
+     * Phương thức lưu 1 hóa đơn
+     */
     public saveInvoice() : void {
         try {
             this.invoiceServiceInterface.saveInvoice(this);
@@ -30,7 +46,8 @@ class Invoice {
             
         }
     }
-
+    
+    // Getter vs setter
     public setInvoiceServiceInterface(invoiceServiceInterface : InvoiceServiceInterface) : Invoice {
         this.invoiceServiceInterface = invoiceServiceInterface;
         return this;

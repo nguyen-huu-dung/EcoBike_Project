@@ -1,3 +1,6 @@
+/**
+ * @author Nguyen Cong Vinh,Dang Tung Lam,Nguyen Huu Dung
+ */
 import { Database } from "../db";
 import { BikeServiceInterface } from "./BikeServiceInterface";
 
@@ -6,6 +9,9 @@ class CoupleBikeService implements BikeServiceInterface {
         throw new Error("Method not implemented.");
     }
 
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getAllBike(): Promise<any> {
         return new Promise((resolve, reject) => {
 
@@ -18,7 +24,9 @@ class CoupleBikeService implements BikeServiceInterface {
         })
     }
 
-
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public getBikeById(bikeId : string): Promise<any> {
         return new Promise((resolve, reject) => {
             // const query = `SELECT * FROM bike, couple_bike, parking where bike.id = ${bikeId} and couple_bike.bikeId = ${bikeId} and bike.parkingId = parking.id`;
@@ -30,6 +38,9 @@ class CoupleBikeService implements BikeServiceInterface {
         })
     }
 
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     public updateIsRentedBikeById(bikeId: string, value: number): Promise<any> {
         return new Promise((resolve, reject) => {
 

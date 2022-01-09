@@ -1,3 +1,6 @@
+/**
+ * @author Nguyen Cong Vinh
+ */
 import { Parking } from "../entity.parking/Parking";
 import { DetailsParkingController } from "../controller/DetailsParkingController";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";

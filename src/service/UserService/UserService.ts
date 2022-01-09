@@ -1,8 +1,13 @@
+/**
+ * @author Nguyen Cong Vinh
+ */
 import { Database } from "../db";
 import { UserServiceInterface } from "./UserServiceInterface";
 
 class UserService implements UserServiceInterface {
-    
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     checkUserRented(userId: string) {
         return new Promise((resolve, reject) => {
             
@@ -13,7 +18,9 @@ class UserService implements UserServiceInterface {
             })
         })
     }
-
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     updateUser(bikeId, transactionId) {
         return new Promise((resolve, reject) => {
             
@@ -24,7 +31,9 @@ class UserService implements UserServiceInterface {
             })
         })
     }
-    
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     getRentBikeByUserId(userId: string) {
         return new Promise((resolve, reject) => {
             

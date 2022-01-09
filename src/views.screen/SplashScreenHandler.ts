@@ -1,3 +1,6 @@
+/**
+ * @author Nguyen Huu Dung
+ */
 import { BaseScreenHandler } from "./BaseScreenHandler";
 
 /**

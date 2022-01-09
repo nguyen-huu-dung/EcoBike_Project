@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import router from './routers';
 /**
+ * @author Nguyen Huu Dung
  * Class thực hiện khởi tạo server
  */
 class App {

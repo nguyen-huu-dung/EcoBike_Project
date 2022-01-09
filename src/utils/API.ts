@@ -9,7 +9,12 @@ class  API {
     public static HASH_CODE : string = "08c2b13b3e32eb6dc41ff0b253748ae8";
     public static PAY_COMMAND : string = "pay";
     public static REFUND_COMMAND: string = "refund";
-    
+    /**
+     * Phương thức thực hiện truy vấn đến interbank theo method patch
+     * @param url : Đường dẫn
+     * @param data : Dữ liệu
+     * @returns 
+     */
     public static async patch(url : string, data : {}) {
         const response = await axios.patch(url, data);
         return response;

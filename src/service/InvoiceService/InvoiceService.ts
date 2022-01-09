@@ -1,9 +1,15 @@
+/**
+ * @author Nguyen Huu Dung, Dang Tung Lam
+ */
 import { Database } from "../db";
 import { Invoice } from "../../entity.invoice/Invoice";
 import { InvoiceServiceInterface } from "./InvoiceServiceInterface";
 
 class InvoiceService implements InvoiceServiceInterface {
     
+    /**
+     * Phương thức dùng để truy vấn database
+     */
     saveInvoice(invoice : Invoice) {
         return new Promise((resolve, reject) => {
 

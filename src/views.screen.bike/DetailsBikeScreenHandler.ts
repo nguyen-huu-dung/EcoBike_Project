@@ -1,11 +1,19 @@
+/**
+ * @author Nguyen Huu Dung
+ */
+
 import { Configs } from "../utils/Configs";
 import { RentBikeController } from "../controller/RentBikeController";
 import { BaseScreenHandler } from "../views.screen/BaseScreenHandler";
 import { Invoice } from "../entity.invoice/Invoice";
 
+/**
+ * @author
+ */
 class DetailsBikeScreenHandler extends BaseScreenHandler {
 
     private invoice : Invoice;
+
     /**
      * Phương thức khởi tạo class
      */
@@ -15,6 +23,7 @@ class DetailsBikeScreenHandler extends BaseScreenHandler {
     }
 
     /**
+     * 
      * Phương thức gửi yêu cầu thuê xe từ user đến controller
      */
     public async rentBike() {
