@@ -41,17 +41,8 @@ class RentBikeController extends BaseController {
             }
             default: return
         }
-        // this.bike = new Bike().setBikeServiceInterface(this.getBikeService(category));
     }
 
-    // private getBikeService(category: string) : BikeServiceInterface {
-    //     switch(category) {
-    //         case "Xe đạp đơn": return ;
-    //         case "Xe đạp đôi": return new CoupleBikeService();
-    //         case "Xe đạp điện": return new ();
-    //         default: return
-    //     }
-    // }
     
     public async rentBike(bikeId : string, userId : string) {
         const checkRentedBike = await this.user.checkRentedBike(userId);

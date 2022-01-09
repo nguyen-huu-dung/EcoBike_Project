@@ -2,7 +2,7 @@ import { Router } from "express";
 import { DetailsParkingScreenHandler } from "../views.screen.parking/DetailsParkingScreenHandler";
 import { HomeScreenHandler } from "../views.screen.home/HomeScreenHandler";
 import { SplashScreenHandler } from "../views.screen/SplashScreenHandler";
-import { DetailsBikeScreenHandler } from "../views.screen.rent/DetailsBikeScreenHandler";
+import { DetailsBikeScreenHandler } from "../views.screen.bike/DetailsBikeScreenHandler";
 import { Configs } from '../utils/Configs';
 import { PaymentScreenHandler } from '../views.screen.payment/PaymentScreenHandler';
 import { RentBikeScreenHandler } from '../views.screen.rent/RentBikeScreenHandler';

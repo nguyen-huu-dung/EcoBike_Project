@@ -1,7 +1,5 @@
-import { CreditCard } from "../src/entity.payment/CreditCard";
+const { sum } = require('./CheckFormatCreditCard.js');
 
-const creditCard = new CreditCard();
-
-it('demo', () => {
-    expect(creditCard.checkCardCodeFormat("1234dsndks")).toBe("false")
-})
+it('Adds 1 + 1 to equals 2', () => {
+    expect(sum(1, 1)).toBe(2);
+});

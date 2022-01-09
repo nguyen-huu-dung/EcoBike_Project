@@ -36,11 +36,15 @@ class PaymentScreenHandler extends BaseScreenHandler {
         if(this.getReq().body.type === "rent") {
             response = await this.getBController().payment(this.invoice, this.getReq().body);
         }
-        if(this.getReq().body.type === "return") {
-            response = await this.getBController().refund(this.invoice, this.getReq().body);
-            // console.log('refund', response);
-            response = await this.getBController().payment(this.invoice, this.getReq().body);
-            // console.log('pay', response);
+        else if(this.getReq().body.type === "return") {
+            if(this.invoice.getTotalPrice() > this.invoice.getBike().getDeposit()) {
+                this.invoice.setTotalPrice(this.invoice.getTotalPrice() - this.invoice.getBike().getDeposit());
+                response = await this.getBController().payment(this.invoice, this.getReq().body);
+            }
+            else {
+                this.invoice.setTotalPrice(this.invoice.getBike().getDeposit() - this.invoice.getTotalPrice());
+                response = await this.getBController().refund(this.invoice, this.getReq().body);
+            }
         }
         this.show(Configs.VIEW_RESULT_PATH, { response });
     }

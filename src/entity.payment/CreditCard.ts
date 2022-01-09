@@ -12,36 +12,40 @@ class  CreditCard {
     }
 
     public checkCreditCardFormat() {
-        return true;
+        let check;
+        check = this.checkCardCodeFormat(this.cardCode);
+        if(check.error) return check;
+        check = this.checkOwnerCardFormat(this.owner);
+        if(check.error) return check;
+        check = this.checkCvvCodeFormat(this.cvvCode);
+        if(check.error) return check;
+        check = this.checkDateExpiredFormat(this.dateExpired);
+        return check;
     }
 
     public checkCardCodeFormat(cardCode : string) {
-        const regex =  new RegExp('[a-zA-Z0-9_]');
-        if(!cardCode.match(regex)) {
+        if(cardCode === null || cardCode === undefined) {
             return new InvalidCardException().getError();
         }
         return { error: false };
     }
 
     public checkOwnerCardFormat(owner : string) {
-        const regex =  new RegExp('[a-zA-Z0-9 ]');
-        if(!owner.match(regex)) {
+        if(owner === null || owner === undefined) {
             return new InvalidCardException().getError();
         }
         return { error: false };
     }
 
     public checkCvvCodeFormat(cvvCode : string) {
-        const regex =  new RegExp('[0-9, (4)]');
-        if(!cvvCode.match(regex)) {
+        if(cvvCode === null || cvvCode === undefined) {
             return new InvalidCardException().getError();
         }
         return { error: false };
     }
 
     public checkDateExpiredFormat(date : string) {
-        const regex =  new RegExp('[a-zA-Z0-9_]');
-        if(!date.match(regex)) {
+        if(date === null || date === undefined) {
             return new InvalidCardException().getError();
         }
         return { error: false };

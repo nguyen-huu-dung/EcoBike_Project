@@ -16,29 +16,46 @@ class PaymentController extends BaseController {
                                             .setCvvCode(card.cvvCode)
                                             .setOwner(card.owner)
                                             .setDateExpired(card.dateExpired);
-        creditCard.checkCreditCardFormat();
-        const response = await this.interbankSubsystem.pay(creditCard, invoice.getTotalPrice(), "pay");
-        if(response.error === false) {
-            const paymentTransaction : PaymentTransaction = new PaymentTransaction(response.transaction.command, 
-                                                                                    response.transaction.transactionContent, 
-                                                                                    response.transaction.createdAt,
-                                                                                    response.transaction.transactionId)
-                                                                                    .setPaymentServiceInterface(new PaymentService());
-            try {
-                await paymentTransaction.savePaymentTransaction();
-                invoice.setPaymentTransaction(paymentTransaction);
-                if(card.type === "rent") {
+        const check =  creditCard.checkCreditCardFormat();
+        if(check.error) return check;
+        let response;
+        if(card.type === "rent") {
+            response = await this.interbankSubsystem.pay(creditCard, invoice.getTotalPrice(), "pay rent bike");
+            if(response.error === false) {
+                const paymentTransaction : PaymentTransaction = new PaymentTransaction(response.transaction.command, 
+                    response.transaction.transactionContent, 
+                    response.transaction.createdAt,
+                    response.transaction.transactionId)
+                    .setPaymentServiceInterface(new PaymentService());
+                try {
                     await invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 1);
                     await new UserService().updateUser(invoice.getBike().getId(), paymentTransaction.getTransactionId());
+                    await paymentTransaction.savePaymentTransaction();
+                    invoice.setPaymentTransaction(paymentTransaction);
+                    await invoice.saveInvoice();
+                } catch (error) {
+                    return new SQLException().getError();
                 }
-                else if (card.type === "return") {
+            }
+        }
+        else if (card.type === "return") {
+            response = await this.interbankSubsystem.pay(creditCard, invoice.getTotalPrice(), "pay return bike");
+            if(response.error === false) {
+                const paymentTransaction : PaymentTransaction = new PaymentTransaction(response.transaction.command, 
+                    response.transaction.transactionContent, 
+                    response.transaction.createdAt,
+                    response.transaction.transactionId)
+                    .setPaymentServiceInterface(new PaymentService());
+                try {
                     await invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 0);
                     await invoice.getBike().updateParkingIdByBikeId(invoice.getBike().getId(), card.parkingId);
                     await new UserService().updateUser(0, 0);
+                    await paymentTransaction.savePaymentTransaction();
+                    invoice.setPaymentTransaction(paymentTransaction);
+                    await invoice.saveInvoice();
+                } catch (error) {
+                    return new SQLException().getError();
                 }
-                await invoice.saveInvoice();
-            } catch (error) {
-                return new SQLException().getError();
             }
         }
         return response;
@@ -49,9 +66,26 @@ class PaymentController extends BaseController {
                                             .setCvvCode(card.cvvCode)
                                             .setOwner(card.owner)
                                             .setDateExpired(card.dateExpired);
-        creditCard.checkCreditCardFormat();
-        // console.log(invoice.getBike());
-        const response = await this.interbankSubsystem.refund(creditCard, invoice.getBike().getDeposit(), "refund");
+        const check =  creditCard.checkCreditCardFormat();
+        if(check.error) return check;
+        const response = await this.interbankSubsystem.refund(creditCard, invoice.getBike().getDeposit(), "refund return bike");
+        if(response.error === false) {
+            const paymentTransaction : PaymentTransaction = new PaymentTransaction(response.transaction.command, 
+                response.transaction.transactionContent, 
+                response.transaction.createdAt,
+                response.transaction.transactionId)
+                .setPaymentServiceInterface(new PaymentService());
+            try {
+                await invoice.getBike().updateIsRentedBikeById(invoice.getBike().getId(), 0);
+                await invoice.getBike().updateParkingIdByBikeId(invoice.getBike().getId(), card.parkingId);
+                await new UserService().updateUser(0, 0);
+                await paymentTransaction.savePaymentTransaction();
+                invoice.setPaymentTransaction(paymentTransaction);
+                await invoice.saveInvoice();
+            } catch (error) {
+                return new SQLException().getError();
+            }
+        }
         return response;
     }
 
