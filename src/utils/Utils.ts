@@ -45,9 +45,11 @@ class Utils {
      */
     public static changeStringToDate(time: string) {
         const str = time.split(" ");
-        const str1 = str[0].split('-');
+        const str1 = str[0].split('/');
         const str2 = str[1].split(":");
-        return new Date(Number(str1[0]), Number(str1[1]), Number(str1[2]), Number(str2[0]), Number(str2[1]), Number(str2[2]));
+        // console.log(str1);
+        // console.log(str2);
+        return new Date(Number(str1[0]), Number(str1[1]) - 1, Number(str1[2]), Number(str2[0]), Number(str2[1]), Number(str2[2]));
     }  
 }
 
