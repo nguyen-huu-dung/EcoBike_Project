@@ -5,6 +5,7 @@ import { Utils } from '../utils/Utils';
 import { SQLException } from '../common.exception/SQLException';
 import { BikeServiceInterface } from '../service/BikeService/BikeServiceInterface';
 import { CalculateRentBikeInterface } from "../interface.calculate/CalculateRentBikeInterface";
+import { BikeService } from 'service/BikeService/BikeService';
 
 class Bike {
 

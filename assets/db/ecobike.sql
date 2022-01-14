@@ -343,26 +343,26 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-CREATE TABLE `couple_electric_bike` (
-  `id` int(11) NOT NULL,
-  `bikeId` int(11) NOT NULL,
-  `battery` int(11) NOT NULL,
-  `estimatingTime` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- CREATE TABLE `couple_electric_bike` (
+--   `id` int(11) NOT NULL,
+--   `bikeId` int(11) NOT NULL,
+--   `battery` int(11) NOT NULL,
+--   `estimatingTime` int(11) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `couple_electric_bike`
-  ADD CONSTRAINT `couple_electric_bike_ibfk_1` FOREIGN KEY (`bikeId`) REFERENCES `bike` (`id`);
+-- ALTER TABLE `couple_electric_bike`
+--   ADD CONSTRAINT `couple_electric_bike_ibfk_1` FOREIGN KEY (`bikeId`) REFERENCES `bike` (`id`);
 
-INSERT INTO `bike` (`id`, `category`, `barcode`, `isRented`, `licensePlate`, `deposit`, `rentalPrice1`, `rentalPrice2`, `rentalPrice3`, `parkingId`) VALUES
-(16, 'Xe điện đôi', 'ECB-0001', 0, 'ECB-0001', 700, 0, 15, 20, 5),
-(17, 'Xe điện đôi', 'ECB-0002', 0, 'ECB-0002', 700, 0, 15, 20, 2),
-(18, 'Xe điện đôi', 'ECB-0003', 0, 'ECB-0003', 700, 0, 15, 20, 4),
-(19, 'Xe điện đôi', 'ECB-0004', 0, 'ECB-0004', 700, 0, 15, 20, 5),
-(20, 'Xe điện đôi', 'ECB-0005', 0, 'ECB-0005', 700, 0, 15, 20, 5);
+-- INSERT INTO `bike` (`id`, `category`, `barcode`, `isRented`, `licensePlate`, `deposit`, `rentalPrice1`, `rentalPrice2`, `rentalPrice3`, `parkingId`) VALUES
+-- (16, 'Xe điện đôi', 'ECB-0001', 0, 'ECB-0001', 700, 0, 15, 20, 5),
+-- (17, 'Xe điện đôi', 'ECB-0002', 0, 'ECB-0002', 700, 0, 15, 20, 2),
+-- (18, 'Xe điện đôi', 'ECB-0003', 0, 'ECB-0003', 700, 0, 15, 20, 4),
+-- (19, 'Xe điện đôi', 'ECB-0004', 0, 'ECB-0004', 700, 0, 15, 20, 5),
+-- (20, 'Xe điện đôi', 'ECB-0005', 0, 'ECB-0005', 700, 0, 15, 20, 5);
 
-INSERT INTO `couple_electric_bike` (`id`, `bikeId`, `battery`, `estimatingTime`) VALUES
-(1, 16, 11, 0),
-(2, 17, 30, 30),
-(3, 18, 38, 30),
-(4, 19, 94, 105),
-(5, 20, 62, 60);
+-- INSERT INTO `couple_electric_bike` (`id`, `bikeId`, `battery`, `estimatingTime`) VALUES
+-- (1, 16, 11, 0),
+-- (2, 17, 30, 30),
+-- (3, 18, 38, 30),
+-- (4, 19, 94, 105),
+-- (5, 20, 62, 60);

@@ -14,13 +14,8 @@ class NormalCalculate implements CalculateRentBikeInterface {
      */
     calculateRentBike(beginTime: string, rentalPrice: any) {
         const currentTime = Date.now();
-        // const currentTime = new Date().getTime();
         const beginRentBikeTime = Utils.changeStringToDate(beginTime).getTime();
-        // console.log(new Date().toString());
-        // console.log(new Date(beginRentBikeTime).toString());
-        // console.log(currentTime,beginRentBikeTime);
-        // const minutes = 100;
-        const minutes = Math.ceil((currentTime - beginRentBikeTime) / 60000) * 60;
+        const minutes = Math.ceil((currentTime - beginRentBikeTime) / 1000) * 60;
         console.log(minutes);
         let amount = 0;
         console.log(rentalPrice);

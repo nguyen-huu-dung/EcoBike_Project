@@ -65,7 +65,6 @@ class RentBikeController extends BaseController {
         if(result.error) return result;
         if(result.bike === null || result.bike === undefined) return new NoRentBikeException().getError();
         this.bike = new Bike().setBikeServiceInterface(new BikeService()).setCalculateRentBikeInterface(new NormalCalculate());
-        // console.log(result.bike.createdAt);
         const { totalRentBike , totalRentTime } = this.bike.calculateRentBike(result.bike.createdAt, [result.bike.rentalPrice1, result.bike.rentalPrice2, result.bike.rentalPrice3]);
         
         return { ...result, totalRentBike , totalRentTime };
